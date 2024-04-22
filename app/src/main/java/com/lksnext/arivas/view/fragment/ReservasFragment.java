@@ -7,16 +7,22 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.fragment.app.FragmentManager;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.lksnext.arivas.R;
 import com.lksnext.arivas.viewmodel.ReservasViewModel;
 
 public class ReservasFragment extends Fragment {
 
+    private NavController navController;
     private ReservasViewModel mViewModel;
 
     public static ReservasFragment newInstance() {
@@ -24,16 +30,24 @@ public class ReservasFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_reservas, container, false);
-    }
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View rootView = inflater.inflate(R.layout.fragment_reservas, container, false);
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(ReservasViewModel.class);
-        // TODO: Use the ViewModel
-    }
+        // Obtén una referencia al botón en tu diseño
+        Button realizarReservaButton = rootView.findViewById(R.id.realizarReserva);
 
+        // Configura un OnClickListener para el botón
+        realizarReservaButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navega al fragmento fragmentRealizarReserva
+                NavController navController = NavHostFragment.findNavController(ReservasFragment.this);
+                navController.navigate(R.id.realizarReservaFragment);
+            }
+        });
+
+        return rootView;
+    }
 }

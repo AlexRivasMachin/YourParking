@@ -1,6 +1,8 @@
 package com.lksnext.arivas.view.activity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
             }
             return false;
         });
+
     }
 
     @Override

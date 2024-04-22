@@ -1,47 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="10dp"
     tools:context=".view.fragment.ReservasFragment">
 
     <!-- mirar para extraerlo fuera y asi -->
+    <!--
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_gravity="bottom"
-        android:layout_margin="16dp">
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="16dp"
-            android:contentDescription="@string/title_realizar_reserva"
-            android:src="@drawable/ic_newres_foreground"
-            android:tint="@color/blue_main" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnReservar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_margin="16dp"
-            android:layout_marginBottom="16dp"
-            android:backgroundTint="@color/blue_main"
-            android:text="@string/title_realizar_reserva"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+        android:layout_margin="16dp"
+        android:orientation="horizontal">
 
     </LinearLayout>
 
-    <!--
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnReservar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/blue_main"
+        android:text="@string/title_realizar_reserva"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/title_realizar_reserva"
+        android:src="@drawable/ic_newres_foreground"
+        android:tint="@color/blue_main" />
+
     <shape xmlns:android="http://schemas.android.com/apk/res/android">
         <solid android:color="@color/blue_main" />
         <corners android:radius="8dp" />
     </shape>
     -->
-</FrameLayout>
+
+    <TextView
+        android:id="@+id/Titulo"
+        android:layout_width="203dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="28dp"
+        android:text="@string/title_Reservas_Activas"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.142"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="YourParking"
+        android:src="@drawable/yourparking_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <Button
+        android:id="@+id/realizarReserva"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="508dp"
+        android:text="Realizar Reserva"
+        app:layout_constraintTop_toBottomOf="@+id/Titulo"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="106dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
