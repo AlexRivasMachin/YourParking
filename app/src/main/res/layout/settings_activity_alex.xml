@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity"
+    tools:layout_editor_absoluteX="-1dp"
+    tools:layout_editor_absoluteY="21dp">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="272dp"
+        android:layout_height="207dp"
+        android:layout_marginBottom="180dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.539"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:srcCompat="@drawable/coche_ajustes"
+        tools:ignore="UnknownIdInLayout" />
+
+    <TextView
+        android:id="@+id/Ajustes"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="45dp"
+        android:text="@string/title_ajustes"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/yourparking_blue" />
+
+    <TextView
+        android:id="@+id/Notificaciones"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="140dp"
+        android:text="Notificaciones:"
+        android:textColor="@color/black"
+        android:textColorLink="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/switch1"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="365dp"
+        tools:ignore="MissingConstraints" />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="64dp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="365dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/Nombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre:"
+        android:textColor="@color/black"
+        android:textColorLink="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.071"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="403dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/Apellidos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Apellidos:"
+        android:textColor="@color/black"
+        android:textColorLink="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.07"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="434dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Correo electrónico:"
+        android:textColor="@color/black"
+        android:textColorLink="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.086"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="531dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/FechaNcto."
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fecha de ncto.:"
+        android:textColor="@color/black"
+        android:textColorLink="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="466dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/NumTlfn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Número de tlfn.:"
+        android:textColor="@color/black"
+        android:textColorLink="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="497dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/modifcarDatos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Modificar datos personales"
+        android:textColor="@color/blue_main"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.705"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="540dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/eliminarCuenta_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Eliminar cuenta de usuario"
+        android:textColor="@color/red_main"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="111dp"
+        tools:layout_editor_absoluteY="693dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
