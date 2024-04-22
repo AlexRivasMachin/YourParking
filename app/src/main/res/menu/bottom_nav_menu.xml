@@ -2,19 +2,17 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/newres"
+        android:id="@+id/inicio"
         android:title="@string/title_inico"
-        android:icon="@drawable/ic_newres_foreground"/>
+        android:icon="@drawable/ic_inicio"/>
     <item
-        android:id="@+id/reservations"
+        android:id="@+id/reservas"
         android:title="@string/title_Reservas_Activas"
-        android:icon="@drawable/ic_reservations_foreground"/>
+        android:icon="@drawable/ic_reservas_pasadas"/>
     <item
-        android:id="@+id/person"
+        android:id="@+id/reservasPasadas"
         android:title="@string/title_Reservas_Activas"
-        android:icon="@drawable/ic_person_foreground"/>
+        android:icon="@drawable/ic_reservas"/>
 
 </menu>
-
-<!-- Materiol Icons icons-->
 

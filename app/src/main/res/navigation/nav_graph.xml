@@ -11,4 +11,18 @@
         android:label="@string/material_motion_easing_accelerated"
         tools:layout="@layout/fragment_main">
     </fragment>
+
+    <fragment
+        android:id="@+id/reservasFragment"
+        android:name="com.lksnext.arivas.view.fragment.MainFragment"
+        android:label="@string/material_motion_easing_accelerated"
+        tools:layout="@layout/fragment_reservas">
+    </fragment>
+
+    <fragment
+        android:id="@+id/reservasPasadasFragment"
+        android:name="com.lksnext.arivas.view.fragment.MainFragment"
+        android:label="@string/material_motion_easing_accelerated"
+        tools:layout="@layout/fragment_reservas_pasadas">
+    </fragment>
 </navigation>
