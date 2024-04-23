@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="10dp"
-    tools:context=".view.fragment.ConfirmarReservaFragment">
+    tools:context=".view.fragment.reservas.ConfirmarReservaFragment">
 
     <TextView
         android:id="@+id/TituloConfirmarReserva"

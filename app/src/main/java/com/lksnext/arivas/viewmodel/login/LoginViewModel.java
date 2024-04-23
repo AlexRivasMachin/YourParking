@@ -1,4 +1,4 @@
-package com.lksnext.arivas.viewmodel;
+package com.lksnext.arivas.viewmodel.login;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

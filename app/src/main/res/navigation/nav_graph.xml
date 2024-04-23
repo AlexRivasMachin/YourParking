@@ -9,11 +9,16 @@
         android:id="@+id/mainFragment"
         android:name="com.lksnext.arivas.view.fragment.MainFragment"
         android:label="@string/material_motion_easing_accelerated"
-        tools:layout="@layout/fragment_main"/>
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_realizarReservaFragment"
+            app:destination="@id/realizarReservaFragment" />
+    </fragment>
+
 
     <fragment
         android:id="@+id/reservasFragment"
-        android:name="com.lksnext.arivas.view.fragment.ReservasFragment"
+        android:name="com.lksnext.arivas.view.fragment.reservas.ReservasFragment"
         android:label="@string/material_motion_easing_accelerated"
         tools:layout="@layout/fragment_reservas">
             <action android:id="@+id/action_reservasFragment_to_realizarReservaFragment"
@@ -22,14 +27,14 @@
 
     <fragment
         android:id="@+id/reservasPasadasFragment"
-        android:name="com.lksnext.arivas.view.fragment.ReservasPasadasFragment"
+        android:name="com.lksnext.arivas.view.fragment.reservas.ReservasPasadasFragment"
         android:label="@string/material_motion_easing_accelerated"
         tools:layout="@layout/fragment_reservas_pasadas">
     </fragment>
 
     <fragment
         android:id="@+id/realizarReservaFragment"
-        android:name="com.lksnext.arivas.view.fragment.RealizarReservaFragment"
+        android:name="com.lksnext.arivas.view.fragment.reservas.RealizarReservaFragment"
         android:label="@string/material_motion_easing_accelerated"
         tools:layout="@layout/fragment_realizar_reserva">
             <action android:id="@+id/action_realizarReservaFragment_to_confirmarReservaFragment"
@@ -38,7 +43,7 @@
 
     <fragment
         android:id="@+id/confirmarReservaFragment"
-        android:name="com.lksnext.arivas.view.fragment.ConfirmarReservaFragment"
+        android:name="com.lksnext.arivas.view.fragment.reservas.ConfirmarReservaFragment"
         android:label="@string/material_motion_easing_accelerated"
         tools:layout="@layout/fragment_confirmar_reserva">
             <action android:id="@+id/action_confirmarReservaFragment_to_reservaConfirmadaFragment"
@@ -47,11 +52,37 @@
 
     <fragment
         android:id="@+id/reservaConfirmadaFragment"
-        android:name="com.lksnext.arivas.view.fragment.ReservaConfirmadaFragment"
+        android:name="com.lksnext.arivas.view.fragment.reservas.ReservaConfirmadaFragment"
         android:label="@string/material_motion_easing_accelerated"
         tools:layout="@layout/fragment_reserva_confirmada">
         <action android:id="@+id/action_reservaConfirmadaFragment_to_reservasFragment"
             app:destination="@id/reservasFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/ajustesFragment"
+        android:name="com.lksnext.arivas.view.fragment.ajustes.AjustesBaseFragmentFragment"
+        android:label="@string/material_motion_easing_accelerated"
+        tools:layout="@layout/fragment_ajustes_base">
+        <action
+            android:id="@+id/action_ajustesFragment_to_ajustesEliminarCuentaFragment"
+            app:destination="@id/ajustesEliminarCuentaFragment" />
+        <action
+            android:id="@+id/action_ajustesFragment_to_ajustesModificarDatosFragment"
+            app:destination="@id/ajustesModificarDatosFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ajustesModificarDatosFragment"
+        android:name="com.lksnext.arivas.view.fragment.ajustes.AjustesModificarDatosFragment"
+        android:label="@string/material_motion_easing_accelerated"
+        tools:layout="@layout/fragment_ajustes_modificar_datos">
+    </fragment>
+
+    <fragment
+        android:id="@+id/ajustesEliminarCuentaFragment"
+        android:name="com.lksnext.arivas.view.fragment.ajustes.AjustesElminarCuentaFragment"
+        android:label="@string/material_motion_easing_accelerated"
+        tools:layout="@layout/fragment_ajustes_elminar_cuenta"/>
 
 </navigation>

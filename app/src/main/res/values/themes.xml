@@ -19,5 +19,10 @@
         <item name="android:textColorHint">@color/blue_main</item>
         <item name="hintTextColor">@color/blue_main</item>
     </style>
+    <!-- Base application theme. -->
+    <style name="Base.Theme.ParkingLKS" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
 
 </resources>

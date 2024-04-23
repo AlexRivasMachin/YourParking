@@ -1,15 +1,9 @@
-package com.lksnext.arivas.view.fragment;
-
-import androidx.lifecycle.ViewModelProvider;
+package com.lksnext.arivas.view.fragment.reservas;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.fragment.app.FragmentManager;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
@@ -18,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.lksnext.arivas.R;
-import com.lksnext.arivas.viewmodel.ReservasViewModel;
+import com.lksnext.arivas.viewmodel.reservas.ReservasViewModel;
 
 public class ReservasFragment extends Fragment {
 

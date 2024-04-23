@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.lksnext.arivas.databinding.ActivityLoginBinding;
-import com.lksnext.arivas.viewmodel.LoginViewModel;
+import com.lksnext.arivas.viewmodel.login.LoginViewModel;
 
 public class LoginActivity extends AppCompatActivity {
 

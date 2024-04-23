@@ -1,4 +1,4 @@
-package com.lksnext.arivas.viewmodel;
+package com.lksnext.arivas.viewmodel.reservas;
 
 import androidx.lifecycle.ViewModel;
 

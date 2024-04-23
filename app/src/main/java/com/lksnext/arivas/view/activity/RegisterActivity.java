@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.lksnext.arivas.databinding.ActivityRegisterBinding;
-import com.lksnext.arivas.viewmodel.RegisterViewModel;
+import com.lksnext.arivas.viewmodel.login.RegisterViewModel;
 
 public class RegisterActivity extends AppCompatActivity {
 
