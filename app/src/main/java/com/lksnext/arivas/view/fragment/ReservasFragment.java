@@ -36,7 +36,7 @@ public class ReservasFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_reservas, container, false);
 
         // Obtén una referencia al botón en tu diseño
-        Button realizarReservaButton = rootView.findViewById(R.id.realizarReserva);
+        Button realizarReservaButton = rootView.findViewById(R.id.btnRealizarReserva);
 
         // Configura un OnClickListener para el botón
         realizarReservaButton.setOnClickListener(new View.OnClickListener() {

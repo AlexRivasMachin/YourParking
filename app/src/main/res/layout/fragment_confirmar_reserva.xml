@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="10dp"
-    tools:context=".view.fragment.RealizarReservaFragment">
+    tools:context=".view.fragment.ConfirmarReservaFragment">
 
     <TextView
-        android:id="@+id/TitulRealizarReserva"
-        android:layout_width="203dp"
-        android:layout_height="37dp"
+        android:id="@+id/TituloConfirmarReserva"
+        android:layout_width="229dp"
+        android:layout_height="35dp"
         android:layout_marginTop="16dp"
-        android:text="@string/title_realizar_reserva"
+        android:text="@string/title_confirmar_reserva"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="24sp"
@@ -20,11 +20,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.132"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/volverImageRealizarReserva1"
+        app:layout_constraintTop_toBottomOf="@+id/volverImageConfirmarReserva"
         tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="YourParking"
@@ -36,23 +36,32 @@
         tools:layout_editor_absoluteY="16dp" />
 
     <ImageView
-        android:id="@+id/volverImageRealizarReserva1"
+        android:id="@+id/volverImageConfirmarReserva"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/atras"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
         tools:layout_editor_absoluteX="25dp"
         tools:ignore="MissingConstraints" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnContinuar"
+        android:id="@+id/btnConfirmarReserva"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="476dp"
         android:text="Confirmar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TitulRealizarReserva" />
+        app:layout_constraintTop_toBottomOf="@+id/TituloConfirmarReserva" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/moto"
+        app:layout_constraintTop_toBottomOf="@+id/TituloConfirmarReserva"
+        tools:layout_editor_absoluteX="107dp"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

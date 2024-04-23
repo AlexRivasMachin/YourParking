@@ -18,35 +18,35 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.lksnext.arivas.R;
+import com.lksnext.arivas.view.fragment.RealizarReservaFragment;
 import com.lksnext.arivas.viewmodel.ReservasViewModel;
 
-public class RealizarReservaFragment extends Fragment {
+public class ReservaConfirmadaFragment extends Fragment {
 
     private NavController navController;
     private ReservasViewModel mViewModel;
 
-    public static RealizarReservaFragment newInstance() {
-        return new RealizarReservaFragment();
+    public static ReservaConfirmadaFragment newInstance() {
+        return new ReservaConfirmadaFragment();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_realizar_reserva, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_reserva_confirmada, container, false);
 
         // Obtén una referencia al botón en tu diseño
-        Button continuarReservaButton = rootView.findViewById(R.id.btnContinuar);
+        Button verReservaButton = rootView.findViewById(R.id.btnVerReserva);
 
         // Configura un OnClickListener para el botón
-        continuarReservaButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    NavController navController = NavHostFragment.findNavController(RealizarReservaFragment.this);
-                    navController.navigate(R.id.confirmarReservaFragment);
-                }
+        verReservaButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController navController = NavHostFragment.findNavController(ReservaConfirmadaFragment.this);
+                navController.navigate(R.id.reservasFragment);
             }
-        );
+        });
 
         return rootView;
     }
@@ -59,6 +59,6 @@ public class RealizarReservaFragment extends Fragment {
         navController = Navigation.findNavController(view);
 
         // Configurar OnClickListener para la imagen de volver
-        view.findViewById(R.id.volverImageRealizarReserva1).setOnClickListener(v -> navController.popBackStack(R.id.reservasFragment, false));
+        view.findViewById(R.id.volverImageReservaConfirmada).setOnClickListener(v -> navController.popBackStack(R.id.confirmarReservaFragment, false));
     }
 }
