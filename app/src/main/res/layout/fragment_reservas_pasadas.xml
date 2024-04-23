@@ -14,7 +14,7 @@
         android:layout_height="37dp"
         android:layout_marginTop="28dp"
         android:text="@string/title_Reservas_pasadas"
-        android:textAlignment="center"
+        android:textAlignment="textStart"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"

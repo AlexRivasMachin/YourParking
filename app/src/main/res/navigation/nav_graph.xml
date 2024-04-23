@@ -83,6 +83,8 @@
         android:id="@+id/ajustesEliminarCuentaFragment"
         android:name="com.lksnext.arivas.view.fragment.ajustes.AjustesElminarCuentaFragment"
         android:label="@string/material_motion_easing_accelerated"
-        tools:layout="@layout/fragment_ajustes_elminar_cuenta"/>
+        tools:layout="@layout/fragment_ajustes_elminar_cuenta">
+    </fragment>
+
 
 </navigation>

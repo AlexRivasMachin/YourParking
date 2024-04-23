@@ -1,9 +1,35 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Theme.ParkingLKS" parent="Base.Theme.ParkingLKS">
-        <!-- Transparent system bars for edge-to-edge. -->
-        <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
+    <!-- Base application theme. -->
+    <style name="Base.Theme.ParkingLKS" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/blue_main</item>
+        <item name="colorPrimaryVariant">@color/orange_main</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/white_secondary</item>
+        <item name="colorSecondaryVariant">@color/blue_main</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/blue_main</item>
+        <!-- Customize your theme here. -->
+        <item name="android:textColorHint">@color/blue_traslucent</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowContentTransitions">true</item>
     </style>
+
+    <style name="Theme.ParkingLKS" parent="Base.Theme.ParkingLKS">
+        <!-- Navigation bar color. -->
+        <item name="android:navigationBarColor">@color/blue_traslucent</item>
+        <!-- Navigation icon color. -->
+        <item name="navigationIconTint">?attr/colorPrimary</item>
+    </style>
+
+    <style name="Theme.ParkingLKS.TextInputLayout">
+        <!-- Hint text color. -->
+        <item name="android:textColorHint">@color/blue_main</item>
+        <item name="hintTextColor">@color/blue_main</item>
+    </style>
+
 </resources>

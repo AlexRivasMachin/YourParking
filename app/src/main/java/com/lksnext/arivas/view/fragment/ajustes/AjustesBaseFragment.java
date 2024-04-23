@@ -7,10 +7,13 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.lksnext.arivas.R;
 import com.lksnext.arivas.viewmodel.ajustes.AjustesBaseViewModel;
@@ -26,14 +29,20 @@ public class AjustesBaseFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_ajustes_base, container, false);
-    }
+        View view = inflater.inflate(R.layout.fragment_ajustes_base, container, false);
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(AjustesBaseViewModel.class);
-        // TODO: Use the ViewModel
-    }
+        TextView modificarDatos = view.findViewById(R.id.modificarDatos);
+        modificarDatos.setOnClickListener(v -> {
+            NavController navController = Navigation.findNavController(view);
+            navController.navigate(R.id.ajustesModificarDatosFragment);
+        });
 
+        TextView eliminarCuenta = view.findViewById(R.id.eliminarCuenta);
+        eliminarCuenta.setOnClickListener(v -> {
+            NavController navController = Navigation.findNavController(view);
+            navController.navigate(R.id.ajustesEliminarCuentaFragment);
+        });
+
+        return view;
+    }
 }
