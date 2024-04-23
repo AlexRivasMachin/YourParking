@@ -23,17 +23,16 @@ public class RealizarReservaFragment extends Fragment {
     private NavController navController;
     private ReservasViewModel mViewModel;
 
-    public static ReservasFragment newInstance() {
-        return new ReservasFragment();
+    public static RealizarReservaFragment newInstance() {
+        return new RealizarReservaFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_reservas, container, false);
+        return inflater.inflate(R.layout.fragment_realizar_reserva, container, false);
     }
 
-    /*
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -44,6 +43,4 @@ public class RealizarReservaFragment extends Fragment {
         // Configurar OnClickListener para la imagen de volver
         view.findViewById(R.id.volverImageRealizarReserva1).setOnClickListener(v -> navController.popBackStack(R.id.reservasFragment, false));
     }
-    */
-
 }
