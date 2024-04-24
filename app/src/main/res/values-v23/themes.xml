@@ -17,6 +17,11 @@
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:windowContentTransitions">true</item>
+        <item name="android:activatedBackgroundIndicator">@color/blue_main</item>
+        <!-- TextViewColors -->
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorLink">@color/black</item>
+        <item name="android:textViewStyle">@color/black</item>
     </style>
 
     <style name="Theme.ParkingLKS" parent="Base.Theme.ParkingLKS">
@@ -30,6 +35,10 @@
         <!-- Hint text color. -->
         <item name="android:textColorHint">@color/blue_main</item>
         <item name="hintTextColor">@color/blue_main</item>
+    </style>
+
+    <style name="App.Custom.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/blue_traslucent2</item>
     </style>
 
 </resources>

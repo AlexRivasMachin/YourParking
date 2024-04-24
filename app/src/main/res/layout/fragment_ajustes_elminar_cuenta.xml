@@ -9,7 +9,7 @@
     tools:context=".view.fragment.ajustes.AjustesElminarCuentaFragment">
 
     <ImageView
-        android:id="@+id/volverImageConfirmarReserva"
+        android:id="@+id/volverAjustesEliminarCuentaImage"
         android:layout_width="76dp"
         android:layout_height="25dp"
         android:src="@drawable/atras"

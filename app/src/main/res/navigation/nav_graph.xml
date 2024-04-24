@@ -59,32 +59,7 @@
             app:destination="@id/reservasFragment" />
     </fragment>
 
-    <fragment
-        android:id="@+id/ajustesFragment"
-        android:name="com.lksnext.arivas.view.fragment.ajustes.AjustesBaseFragmentFragment"
-        android:label="@string/material_motion_easing_accelerated"
-        tools:layout="@layout/fragment_ajustes_base">
-        <action
-            android:id="@+id/action_ajustesFragment_to_ajustesEliminarCuentaFragment"
-            app:destination="@id/ajustesEliminarCuentaFragment" />
-        <action
-            android:id="@+id/action_ajustesFragment_to_ajustesModificarDatosFragment"
-            app:destination="@id/ajustesModificarDatosFragment" />
-    </fragment>
 
-    <fragment
-        android:id="@+id/ajustesModificarDatosFragment"
-        android:name="com.lksnext.arivas.view.fragment.ajustes.AjustesModificarDatosFragment"
-        android:label="@string/material_motion_easing_accelerated"
-        tools:layout="@layout/fragment_ajustes_modificar_datos">
-    </fragment>
-
-    <fragment
-        android:id="@+id/ajustesEliminarCuentaFragment"
-        android:name="com.lksnext.arivas.view.fragment.ajustes.AjustesElminarCuentaFragment"
-        android:label="@string/material_motion_easing_accelerated"
-        tools:layout="@layout/fragment_ajustes_elminar_cuenta">
-    </fragment>
 
 
 </navigation>

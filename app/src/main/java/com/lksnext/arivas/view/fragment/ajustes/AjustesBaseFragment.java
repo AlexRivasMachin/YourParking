@@ -2,6 +2,7 @@ package com.lksnext.arivas.view.fragment.ajustes;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,9 +14,11 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lksnext.arivas.R;
+import com.lksnext.arivas.view.activity.MainActivity;
 import com.lksnext.arivas.viewmodel.ajustes.AjustesBaseViewModel;
 
 public class AjustesBaseFragment extends Fragment {
@@ -42,6 +45,13 @@ public class AjustesBaseFragment extends Fragment {
             NavController navController = Navigation.findNavController(view);
             navController.navigate(R.id.ajustesEliminarCuentaFragment);
         });
+
+        ImageView volverMainImage = view.findViewById(R.id.volverMainImage);
+        volverMainImage.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            startActivity(intent);
+        });
+;
 
         return view;
     }

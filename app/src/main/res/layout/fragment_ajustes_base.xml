@@ -9,7 +9,7 @@
     tools:context=".view.fragment.ajustes.AjustesBaseFragment">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/volverMainImage"
         android:layout_width="76dp"
         android:layout_height="25dp"
         android:layout_marginTop="16dp"

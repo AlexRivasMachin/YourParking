@@ -9,7 +9,7 @@
     tools:context=".view.fragment.ajustes.AjustesModificarDatosFragment">
 
     <ImageView
-        android:id="@+id/volverImageConfirmarReserva"
+        android:id="@+id/volverModificarDatosCuentaImage"
         android:layout_width="76dp"
         android:layout_height="25dp"
         android:src="@drawable/atras"
@@ -122,6 +122,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/volverImageConfirmarReserva" />
+        app:layout_constraintTop_toBottomOf="@+id/volverModificarDatosCuentaImage" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnConfirmarCambios"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="424dp"
+        android:text="Confirmar cambios"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

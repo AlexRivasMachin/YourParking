@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+
     <!-- Base application theme. -->
-    <style name="Theme.ParkingLKS" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Base.Theme.ParkingLKS" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/blue_main</item>
         <item name="colorPrimaryVariant">@color/orange_main</item>
@@ -10,19 +11,36 @@
         <item name="colorSecondaryVariant">@color/blue_main</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">@color/blue_main</item>
         <!-- Customize your theme here. -->
-        <item name="android:textColorHint">@color/blue_main</item>
+        <item name="android:textColorHint">@color/blue_traslucent</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:activatedBackgroundIndicator">@color/blue_main</item>
+    </style>
+
+    <style name="Theme.ParkingLKS" parent="Base.Theme.ParkingLKS">
+        <!-- Navigation bar color. -->
+        <item name="android:navigationBarColor">@color/blue_traslucent</item>
+        <!-- Navigation icon color. -->
+        <item name="navigationIconTint">?attr/colorPrimary</item>
     </style>
 
     <style name="Theme.ParkingLKS.TextInputLayout">
+        <!-- Hint text color. -->
         <item name="android:textColorHint">@color/blue_main</item>
         <item name="hintTextColor">@color/blue_main</item>
     </style>
-    <!-- Base application theme. -->
-    <style name="Base.Theme.ParkingLKS" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+    <style name="App.Custom.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/blue_traslucent2</item>
+    </style>
+
+    <style name="App.Custom.TextVire" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorLink">@color/white</item>
+        <item name="android:textViewStyle">@color/white</item>
     </style>
 
 </resources>
