@@ -23,6 +23,7 @@
         android:id="@+id/Nombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:text="Nombre:"
         android:textColor="@color/black"
         android:textColorLink="@color/black"
@@ -30,14 +31,59 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.071"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="108dp" />
+        app:layout_constraintTop_toBottomOf="@+id/Ajustes"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/NumTlfn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Número de tlfn.:"
+        android:textColor="@color/black"
+        android:textColorLink="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.087"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/FechaNcto."
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Correo electrónico:"
+        android:textColor="@color/black"
+        android:textColorLink="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.093"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NumTlfn"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/Apellidos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:text="Apellidos:"
+        android:textColor="@color/black"
+        android:textColorLink="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.073"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Nombre"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/FechaNcto."
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="4dp"
         android:text="Fecha de ncto.:"
         android:textColor="@color/black"
         android:textColorLink="@color/black"
@@ -60,51 +106,6 @@
         app:layout_constraintHorizontal_bias="0.921"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:text="Correo electrónico:"
-        android:textColor="@color/black"
-        android:textColorLink="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.093"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NumTlfn"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/NumTlfn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:text="Número de tlfn.:"
-        android:textColor="@color/black"
-        android:textColorLink="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.087"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/FechaNcto."
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/Apellidos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:text="Apellidos:"
-        android:textColor="@color/black"
-        android:textColorLink="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.073"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Nombre"
         tools:ignore="MissingConstraints" />
 
     <TextView

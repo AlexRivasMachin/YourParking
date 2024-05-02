@@ -18,6 +18,7 @@
     <string name="title_conserva_reserva">Reserva confirmada</string>
     <string name="title_reserva_confirmada">Reserva confirmada</string>
     <string name="title_activity_settings">SettingsActivity</string>
+    <string name="como_llegar">Como llegar al parking</string>
 
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>

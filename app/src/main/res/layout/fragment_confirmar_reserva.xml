@@ -59,9 +59,10 @@
         android:id="@+id/imageView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:src="@drawable/moto"
         app:layout_constraintTop_toBottomOf="@+id/TituloConfirmarReserva"
-        tools:layout_editor_absoluteX="107dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="88dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
