@@ -1,5 +1,7 @@
 package com.lksnext.arivas.view.fragment.reservas;
 
+import android.app.DatePickerDialog;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,6 +15,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 
 import com.lksnext.arivas.R;
 import com.lksnext.arivas.viewmodel.reservas.ReservasViewModel;
@@ -29,13 +33,8 @@ public class RealizarReservaFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_realizar_reserva, container, false);
-
-        // Obtén una referencia al botón en tu diseño
         Button continuarReservaButton = rootView.findViewById(R.id.btnContinuar);
-
-        // Configura un OnClickListener para el botón
         continuarReservaButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -44,6 +43,29 @@ public class RealizarReservaFragment extends Fragment {
                 }
             }
         );
+
+        EditText etDate = rootView.findViewById(R.id.et_date);
+
+        etDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar c = Calendar.getInstance();
+                int year = c.get(Calendar.YEAR);
+                int month = c.get(Calendar.MONTH);
+                int day = c.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        getActivity(),
+                        R.style.AppTheme_DatePicker,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int month, int day) {
+                                etDate.setText(day + "/" + (month + 1) + "/" + year);
+                            }
+                        }, year, month, day);
+                datePickerDialog.show();
+            }
+        });
 
         return rootView;
     }

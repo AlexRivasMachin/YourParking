@@ -20,6 +20,13 @@
         <item name="android:activatedBackgroundIndicator">@color/blue_main</item>
     </style>
 
+    <style name="AppTheme.DatePicker" parent="Theme.Material3.Dark.Dialog.MinWidth">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorOnPrimary">@color/colorPrimary</item>
+        <!-- Otros colores que quieras personalizar -->
+    </style>
+
+
     <style name="Theme.ParkingLKS" parent="Base.Theme.ParkingLKS">
         <!-- Navigation bar color. -->
        <!-- <item name="android:navigationBarColor">@color/blue_traslucent</item>-->
