@@ -6,6 +6,7 @@
     <color name="blue_main">#0065D0</color>
     <color name="blue_traslucent">#6A0065D0</color>
     <color name="blue_traslucent2">#45062E59</color>
+    <color name="blue_traslucent3">#00062EFF</color>
     <color name="grey_not_active">#9C9C9C</color>
     <color name="white_secondary">#EEEEEE</color>
     <color name="black_secondary">#6B6969</color>
@@ -14,5 +15,4 @@
     <color name="red_main">#FF2E00</color>
     <color name="grey_first">#1E1E1E</color>
     <color name="grey_second">#DCDBDB</color>
-
 </resources>
