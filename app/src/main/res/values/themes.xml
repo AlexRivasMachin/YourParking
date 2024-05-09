@@ -26,6 +26,12 @@
         <!-- Otros colores que quieras personalizar -->
     </style>
 
+    <style name="AppTheme.TimePicker" parent="Theme.Material3.Dark.Dialog.MinWidth">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorOnPrimary">@color/colorPrimary</item>
+        <!-- Otros colores que quieras personalizar -->2
+    </style>
+
 
     <style name="Theme.ParkingLKS" parent="Base.Theme.ParkingLKS">
         <!-- Navigation bar color. -->

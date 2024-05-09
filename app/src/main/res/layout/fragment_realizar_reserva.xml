@@ -7,6 +7,57 @@
     android:layout_margin="10dp"
     tools:context=".view.fragment.reservas.RealizarReservaFragment">
 
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/et_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="false"
+        android:hint="Selecciona la fecha"
+        app:layout_constraintTop_toBottomOf="@+id/chipGroup"
+        tools:ignore="DuplicateIds,MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        android:clipToOutline="true"
+        style="@style/Widget.Material3.TextInputEditText.OutlinedBox"/>
+
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/et_time_entry"
+        style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:focusable="false"
+        android:hint="Selecciona la hora de entrada"
+        app:layout_constraintTop_toBottomOf="@+id/et_date"
+        tools:ignore="DuplicateIds,MissingConstraints"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Your hint text"
+        app:endIconMode="clear_text"
+        app:layout_constraintTop_toBottomOf="@+id/et_time_entry"
+        app:startIconDrawable="@drawable/clock_icon"
+        tools:ignore="MissingConstraints">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_time_exit"
+            style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="52dp"
+            android:clickable="true"
+            android:focusable="false"
+            android:hint="Selecciona la hora de salida"
+            app:layout_constraintTop_toBottomOf="@+id/et_date"
+            tools:ignore="DuplicateIds,MissingConstraints"
+            tools:layout_editor_absoluteX="0dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <TextView
         android:id="@+id/TitulRealizarReserva"
         android:layout_width="203dp"
@@ -42,48 +93,54 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:layout_editor_absoluteX="113dp">
+        tools:layout_editor_absoluteX="24dp"
+        app:singleSelection="true">
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip1"
+            style="@style/Widget.Material3.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:text="Automovil "
-            app:chipIcon="@drawable/auto" />
+            app:checkedIcon="@drawable/auto"
+            app:chipIcon="@drawable/auto"
+            app:chipIconVisible="true" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip2"
+            style="@style/Widget.Material3.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Motocicleta "
-            app:chipIcon="@drawable/motociclea" />
+            android:checked="false"
+            android:text="Motocicleta"
+            app:checkedIcon="@drawable/motociclea"
+            app:chipIcon="@drawable/motociclea"
+            app:chipIconVisible="true" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip3"
+            style="@style/Widget.Material3.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="false"
             android:text="Con estación de carga"
-            app:chipIcon="@drawable/electrico" />
+            app:checkedIcon="@drawable/electrico"
+            app:chipIcon="@drawable/electrico"
+            app:chipIconVisible="true" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip4"
+            style="@style/Widget.Material3.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="false"
             android:text="Movilidad reducida"
-            app:chipIcon="@drawable/discapacitado" />
+            app:checkedIcon="@drawable/discapacitado"
+            app:chipIcon="@drawable/discapacitado"
+            app:chipIconVisible="true" />
 
     </com.google.android.material.chip.ChipGroup>
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/et_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="false"
-        android:hint="Selecciona la fecha"
-        app:layout_constraintTop_toBottomOf="@+id/chipGroup"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp" />
 
     <ImageView
         android:id="@+id/volverImageRealizarReserva1"
@@ -112,6 +169,7 @@
         android:layout_marginTop="4dp"
         android:text="Tipo de plaza:"
         app:layout_constraintTop_toBottomOf="@+id/TitulRealizarReserva"
-        tools:layout_editor_absoluteX="0dp" />
+        tools:layout_editor_absoluteX="0dp"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
