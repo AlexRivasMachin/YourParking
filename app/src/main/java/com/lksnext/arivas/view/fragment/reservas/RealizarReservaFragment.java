@@ -20,6 +20,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
+import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 import com.lksnext.arivas.R;
@@ -86,23 +87,18 @@ public class RealizarReservaFragment extends Fragment {
         view.findViewById(R.id.volverImageRealizarReserva1).setOnClickListener(v -> navController.popBackStack(R.id.reservasFragment, false));
     }
 
-    public DatePicker createDatePicker(EditText etDate) {
+    public void createDatePicker(EditText etDate) {
         final Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(
-                getActivity(),
-                R.style.AppTheme_DatePicker,
-                new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int day) {
-                        etDate.setText(day + "/" + (month + 1) + "/" + year);
-                    }
-                }, year, month, day);
-        datePickerDialog.show();
-        return datePickerDialog.getDatePicker();
+        MaterialDatePicker.Builder<Long> builder = MaterialDatePicker.Builder.datePicker();
+        builder.setTitleText("Selecciona la fecha");
+        MaterialDatePicker<Long> materialDatePicker = builder.build();
+
+        materialDatePicker.show(getChildFragmentManager(), "MATERIAL_DATE_PICKER");
+
     };
 
     public void createTimePicker(EditText etTime) {
