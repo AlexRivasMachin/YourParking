@@ -3,7 +3,7 @@ apply plugin: 'androidx.navigation.safeargs'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'org.sonarqube'
 
-sonar {
+sonarqube {
   properties {
     property "sonar.projectKey", "AlexRivasMachin_Arivas-Parking"
     property "sonar.organization", "alexrivasmachin"
