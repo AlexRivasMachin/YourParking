@@ -8,6 +8,86 @@
     tools:context=".view.fragment.reservas.ReservaConfirmadaFragment">
 
     <TextView
+        android:id="@+id/DatosReserva"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="Datos de la reserva"
+        android:textAlignment="textStart"
+        android:textColor="@color/blue_main"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/Día"
+        tools:layout_editor_absoluteX="128dp" />
+
+    <TextView
+        android:id="@+id/Día"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Motocicleta"
+        tools:layout_editor_absoluteX="264dp"
+        tools:layout_editor_absoluteY="472dp" />
+
+    <TextView
+        android:id="@+id/Día"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="XX:XX:XX"
+        tools:layout_editor_absoluteX="264dp"
+        tools:layout_editor_absoluteY="415dp" />
+
+    <TextView
+        android:id="@+id/Día"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="140dp"
+        android:text="Hora de salida:"
+        app:layout_constraintEnd_toStartOf="@+id/Día"
+        tools:layout_editor_absoluteY="453dp" />
+
+    <TextView
+        android:id="@+id/Día"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="XX:XX"
+        tools:layout_editor_absoluteX="264dp"
+        tools:layout_editor_absoluteY="434dp" />
+
+    <TextView
+        android:id="@+id/Día"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="XX:XX"
+        tools:layout_editor_absoluteX="264dp"
+        tools:layout_editor_absoluteY="453dp" />
+
+    <TextView
+        android:id="@+id/Día"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="144dp"
+        android:text="Tipo de plaza:"
+        app:layout_constraintEnd_toStartOf="@+id/Día"
+        tools:layout_editor_absoluteY="472dp" />
+
+    <TextView
+        android:id="@+id/Día"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="60dp"
+        android:text="Hora de entrada:"
+        app:layout_constraintEnd_toStartOf="@+id/Día"
+        tools:layout_editor_absoluteY="434dp" />
+
+    <TextView
+        android:id="@+id/Día"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="56dp"
+        android:text="Dia:"
+        app:layout_constraintEnd_toStartOf="@+id/Día"
+        tools:layout_editor_absoluteY="415dp" />
+
+    <TextView
         android:id="@+id/TituloReservaConfirmada"
         android:layout_width="241dp"
         android:layout_height="35dp"
@@ -54,5 +134,31 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TituloReservaConfirmada" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="33dp"
+        android:src="@drawable/coche_normal"
+        app:layout_constraintTop_toBottomOf="@+id/TituloReservaConfirmada"
+        tools:layout_editor_absoluteX="87dp" />
+
+    <TextView
+        android:id="@+id/plaza"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        android:background="@color/blue_main"
+        android:drawablePadding="10sp"
+        android:fontFamily="sans-serif-condensed-light"
+        android:padding="10sp"
+        android:paddingTop="5sp"
+        android:paddingBottom="5sp"
+        android:text="Plaza"
+        android:textColor="@color/design_default_color_on_primary"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6"
+        tools:layout_editor_absoluteX="169dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

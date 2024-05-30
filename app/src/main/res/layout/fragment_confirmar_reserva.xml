@@ -27,13 +27,14 @@
         android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:contentDescription="YourParking"
         android:src="@drawable/yourparking_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/volverImageConfirmarReserva"
@@ -42,8 +43,8 @@
         android:layout_marginTop="16dp"
         android:src="@drawable/atras"
         app:layout_constraintTop_toBottomOf="@+id/imageView3"
-        tools:layout_editor_absoluteX="25dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="25dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnConfirmarReserva"
@@ -51,6 +52,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="476dp"
         android:text="Confirmar"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TituloConfirmarReserva" />
@@ -59,10 +61,96 @@
         android:id="@+id/imageView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="24dp"
         android:src="@drawable/moto"
         app:layout_constraintTop_toBottomOf="@+id/TituloConfirmarReserva"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="88dp" />
+
+    <TextView
+        android:id="@+id/DatosReserva"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="64dp"
+        android:text="Datos de la reserva"
+        android:textAlignment="textStart"
+        android:textColor="@color/blue_main"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/Día"
+        tools:layout_editor_absoluteX="55dp" />
+
+    <TextView
+        android:id="@+id/Día"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hora de entrada:"
+        app:layout_constraintEnd_toStartOf="@+id/Día"
+        tools:layout_editor_absoluteY="395dp" />
+
+    <TextView
+        android:id="@+id/Día"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="XX:XX"
+        tools:layout_editor_absoluteX="191dp"
+        tools:layout_editor_absoluteY="395dp" />
+
+    <TextView
+        android:id="@+id/Día"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="XX:XX:XX"
+        tools:layout_editor_absoluteX="191dp"
+        tools:layout_editor_absoluteY="376dp" />
+
+    <TextView
+        android:id="@+id/Día"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="XX:XX"
+        tools:layout_editor_absoluteX="191dp"
+        tools:layout_editor_absoluteY="414dp" />
+
+    <TextView
+        android:id="@+id/Día"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dia:"
+        app:layout_constraintEnd_toStartOf="@+id/Día"
+        tools:layout_editor_absoluteY="376dp" />
+
+    <TextView
+        android:id="@+id/Día"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hora de salida:"
+        app:layout_constraintEnd_toStartOf="@+id/Día"
+        tools:layout_editor_absoluteY="414dp" />
+
+    <TextView
+        android:id="@+id/Día"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tipo de plaza:"
+        app:layout_constraintEnd_toStartOf="@+id/Día"
+        tools:layout_editor_absoluteY="433dp" />
+
+    <TextView
+        android:id="@+id/Día"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Motocicleta"
+        tools:layout_editor_absoluteX="191dp"
+        tools:layout_editor_absoluteY="433dp" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancelar esta reserva "
+        app:layout_constraintBottom_toTopOf="@+id/btnConfirmarReserva"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="127dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
