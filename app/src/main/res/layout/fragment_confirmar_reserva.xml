@@ -40,11 +40,13 @@
         android:id="@+id/volverImageConfirmarReserva"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:src="@drawable/atras"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.067"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="25dp" />
+        tools:ignore="MissingConstraints" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnConfirmarReserva"
@@ -63,85 +65,114 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:src="@drawable/moto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TituloConfirmarReserva"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="88dp" />
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/DatosReserva"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="64dp"
+        android:layout_marginTop="38dp"
+        android:layout_marginBottom="40dp"
         android:text="Datos de la reserva"
         android:textAlignment="textStart"
         android:textColor="@color/blue_main"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/Día"
-        tools:layout_editor_absoluteX="55dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/Día"
+        android:id="@+id/HoraEntradaNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hora de entrada:"
-        app:layout_constraintEnd_toStartOf="@+id/Día"
-        tools:layout_editor_absoluteY="395dp" />
-
-    <TextView
-        android:id="@+id/Día"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="115dp"
         android:text="XX:XX"
-        tools:layout_editor_absoluteX="191dp"
-        tools:layout_editor_absoluteY="395dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.098"
+        app:layout_constraintStart_toEndOf="@+id/HoraEntrada"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
     <TextView
-        android:id="@+id/Día"
+        android:id="@+id/DíaNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="100dp"
         android:text="XX:XX:XX"
-        tools:layout_editor_absoluteX="191dp"
-        tools:layout_editor_absoluteY="376dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.108"
+        app:layout_constraintStart_toEndOf="@+id/Día"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
     <TextView
-        android:id="@+id/Día"
+        android:id="@+id/HoraSalidaNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="134dp"
         android:text="XX:XX"
-        tools:layout_editor_absoluteX="191dp"
-        tools:layout_editor_absoluteY="414dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.098"
+        app:layout_constraintStart_toEndOf="@+id/HoraSalida"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
+    <TextView
+        android:id="@+id/Tipo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="154dp"
+        android:text="Motocicleta"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.137"
+        app:layout_constraintStart_toEndOf="@+id/TipoPlaza"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
     <TextView
         android:id="@+id/Día"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
         android:text="Dia:"
-        app:layout_constraintEnd_toStartOf="@+id/Día"
-        tools:layout_editor_absoluteY="376dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
     <TextView
-        android:id="@+id/Día"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hora de salida:"
-        app:layout_constraintEnd_toStartOf="@+id/Día"
-        tools:layout_editor_absoluteY="414dp" />
-
-    <TextView
-        android:id="@+id/Día"
+        android:id="@+id/TipoPlaza"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tipo de plaza:"
-        app:layout_constraintEnd_toStartOf="@+id/Día"
-        tools:layout_editor_absoluteY="433dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.396"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/HoraSalida" />
 
     <TextView
-        android:id="@+id/Día"
+        android:id="@+id/HoraEntrada"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Motocicleta"
-        tools:layout_editor_absoluteX="191dp"
-        tools:layout_editor_absoluteY="433dp" />
+        android:text="Hora de entrada:"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.361"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Día" />
+
+    <TextView
+        android:id="@+id/HoraSalida"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hora de salida:"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.382"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/HoraEntrada" />
 
     <TextView
         android:id="@+id/textView5"
@@ -149,8 +180,10 @@
         android:layout_height="wrap_content"
         android:text="Cancelar esta reserva "
         app:layout_constraintBottom_toTopOf="@+id/btnConfirmarReserva"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView5"
-        app:layout_constraintVertical_bias="1.0"
-        tools:layout_editor_absoluteX="127dp" />
+        app:layout_constraintVertical_bias="0.979" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
