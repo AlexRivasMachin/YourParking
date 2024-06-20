@@ -25,16 +25,14 @@
       android:layout_width="320dp"
       android:layout_height="wrap_content"
       android:layout_marginStart="45dp"
-      android:layout_marginTop="40dp"
+      android:layout_marginTop="24dp"
       android:layout_marginEnd="45dp"
       android:text="Estate seguro con tu plaza reservada"
       android:textAlignment="center"
       android:textColor="?attr/colorOnSecondary"
       android:textSize="24sp"
       android:textStyle="bold"
-      app:layout_constraintBottom_toTopOf="@+id/iniciarSesion"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="1.0"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
@@ -49,29 +47,67 @@
       app:layout_constraintTop_toTopOf="parent"
       app:srcCompat="@drawable/yourparking_blue" />
 
+  <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/NombreUsuariolayout"
+      android:layout_width="300dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:layout_marginBottom="32dp"
+      android:hint="Correo electrónico"
+      app:layout_constraintBottom_toTopOf="@+id/iniciarSesion"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/Titulo"
+      tools:ignore="MissingConstraints">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        android:layout_height="53dp" />
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/ContraseñaInputLayout"
+      android:layout_width="300dp"
+      android:layout_height="wrap_content"
+      android:hint="Contraseña"
+      app:endIconMode="password_toggle"
+      app:layout_constraintBottom_toTopOf="@+id/iniciarSesion"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/NombreUsuariolayout"
+      tools:ignore="MissingConstraints">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:inputType="textPassword" />
+  </com.google.android.material.textfield.TextInputLayout>
+
   <Button
       android:id="@+id/iniciarSesion"
       android:layout_width="320dp"
       android:layout_height="wrap_content"
-      android:layout_marginTop="32dp"
+      android:layout_marginTop="233dp"
       android:text="@string/title_login"
       android:textColor="@color/white"
-      app:layout_constraintBottom_toTopOf="@+id/registrarse"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.494"
+      app:layout_constraintHorizontal_bias="0.505"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/Titulo" />
-
+      app:layout_constraintTop_toBottomOf="@+id/Titulo"
+      tools:ignore="MissingConstraints" />
   <Button
       android:id="@+id/registrarse"
-      android:layout_width="320dp"
+      style="?attr/materialButtonOutlinedStyle"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="236dp"
-      android:text="@string/title_singup"
-      android:textColor="@color/white"
+      android:layout_marginTop="7dp"
+      android:text="Regístrate"
+      android:width="320dp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.498"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/iniciarSesion" />
-
+      app:layout_constraintTop_toBottomOf="@+id/iniciarSesion"
+      app:layout_constraintVertical_bias="0.034"
+      tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

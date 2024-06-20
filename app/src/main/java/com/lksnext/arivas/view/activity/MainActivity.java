@@ -33,20 +33,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Asignamos la vista/interfaz main (layout)
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Con el NavigationHost podremos movernos por distintas pestañas dentro de la misma pantalla
         NavHostFragment navHostFragment =
                 (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.flFragment);
+        assert navHostFragment != null;
         navController = navHostFragment.getNavController();
 
-        // Asignamos los botones de navegacion que se encuentran en la vista (layout)
         bottomNavigationView = binding.bottomNavigationView;
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
-        // Dependendiendo que boton clique el usuario de la navegacion se hacen distintas cosas
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.inicio) {
@@ -62,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
             return false;
         });
 
-        // Verificar si las plazas de estacionamiento ya están generadas
         checkAndPopulateParkingSlots();
     }
 
@@ -84,53 +80,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     private void populateParkingSlots() {
-        // Define the data for each parking slot
-        int slotId = 0;
-
-        // STD slots
-        for (int i = 0; i < 50; i++) {
+        populateParkingType(50, "STD");
+        populateParkingType(10, "ELEC");
+        populateParkingType(30, "MOTO");
+        populateParkingType(10, "DISC");
+    }
+    private void populateParkingType(int slots, String type) {
+        for (int i = 0; i < slots; i++) {
             Map<String, Object> slot = new HashMap<>();
-            slot.put("id", slotId++);
-            slot.put("number", "STD" + i);
+            slot.put("id", i);
+            slot.put("number", type + i);
             slot.put("available", true);
-            slot.put("type", "STD");
-            db.collection("parking_slots").document("STD" + i)
+            slot.put("type", type);
+            db.collection("parking_slots").document(type + i)
                     .set(slot);
         }
 
-        // ELEC slots
-        for (int i = 0; i < 10; i++) {
-            Map<String, Object> slot = new HashMap<>();
-            slot.put("id", slotId++);
-            slot.put("number", "ELEC" + i);
-            slot.put("available", true);
-            slot.put("type", "ELEC");
-            db.collection("parking_slots").document("ELEC" + i)
-                    .set(slot);
-        }
-
-        // MOTO slots
-        for (int i = 0; i < 30; i++) {
-            Map<String, Object> slot = new HashMap<>();
-            slot.put("id", slotId++);
-            slot.put("number", "MOTO" + i);  // Añadir número para consistencia
-            slot.put("available", true);
-            slot.put("type", "MOTO");
-            db.collection("parking_slots").document("MOTO" + i)
-                    .set(slot);
-        }
-
-        // DISC slots
-        for (int i = 0; i < 10; i++) {
-            Map<String, Object> slot = new HashMap<>();
-            slot.put("id", slotId++);
-            slot.put("number", "DISC" + i);
-            slot.put("available", true);
-            slot.put("type", "DISC");
-            db.collection("parking_slots").document("DISC" + i)
-                    .set(slot);
-        }
     }
 }
