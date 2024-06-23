@@ -1,5 +1,6 @@
 package com.lksnext.arivas.view.fragment.reservas;
 
+import static androidx.databinding.adapters.CompoundButtonBindingAdapter.setChecked;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import java.util.Calendar;
@@ -23,13 +24,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.datepicker.CalendarConstraints;
+import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
+import com.google.android.material.chip.Chip;
 import com.lksnext.arivas.R;
 import com.lksnext.arivas.domain.CardAdapter;
+import com.lksnext.arivas.domain.FutureDateValidator;
 import com.lksnext.arivas.domain.PlazaAdapter;
 import com.lksnext.arivas.view.fragment.MainFragment;
 import com.lksnext.arivas.viewmodel.reservas.ReservasViewModel;
@@ -46,6 +52,9 @@ public class RealizarReservaFragment extends Fragment {
     private RecyclerView recyclerView;
     private PlazaAdapter adapter;
     private List<Integer> dataSet;
+
+    private  String selectedChipType;
+
 
     public static RealizarReservaFragment newInstance() {
         return new RealizarReservaFragment();
@@ -64,6 +73,25 @@ public class RealizarReservaFragment extends Fragment {
                 }
             }
         );
+
+        ChipGroup chipGroup = rootView.findViewById(R.id.chipGroup);
+
+        chipGroup.setOnCheckedStateChangeListener(new ChipGroup.OnCheckedStateChangeListener() {
+            @Override
+            public void onCheckedChanged(@NonNull ChipGroup group, @NonNull List<Integer> checkedIds) {
+                if (checkedIds.isEmpty()) {
+                    Chip lastCheckedChip = group.findViewById(R.id.STD); // Default chip ID
+                    lastCheckedChip.setChecked(true);
+                    updateRecyclerView(rootView, "STD");
+                } else {
+                    int checkedId = checkedIds.get(0);
+                    Chip selectedChip = group.findViewById(checkedId);
+                    selectedChipType = selectedChip.getText().toString();
+                    updateAdapterWithSelectedChipType();
+                    updateRecyclerView(rootView, selectedChipType);
+                }
+            }
+        });
         EditText etDate = rootView.findViewById(R.id.et_date);
         etDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,24 +116,6 @@ public class RealizarReservaFragment extends Fragment {
             }
         });
 
-        // Configurar RecyclerView
-        recyclerView = rootView.findViewById(R.id.recyclerViewCards);
-        recyclerView.setHasFixedSize(true);
-
-        // Usar un GridLayoutManager para la disposición de las tarjetas
-        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 5, GridLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(layoutManager);
-
-        // Crear dataset
-        dataSet = new ArrayList<Integer>();
-        for (int i = 1; i <= 10; i++) {
-            dataSet.add(i);
-        }
-
-        // Crear y asignar el adaptador
-        adapter = new PlazaAdapter(dataSet, getContext());
-        recyclerView.setAdapter(adapter);
-
         return rootView;
     }
     @Override
@@ -116,14 +126,14 @@ public class RealizarReservaFragment extends Fragment {
         navController = Navigation.findNavController(view);
 
         // Configurar OnClickListener para la imagen de volver
-        view.findViewById(R.id.volverImageRealizarReserva1).setOnClickListener(v -> navController.popBackStack(R.id.reservasFragment, false));
     }
 
     public void createDatePicker(EditText etDate) {
-
         long today = MaterialDatePicker.todayInUtcMilliseconds();
 
         CalendarConstraints.Builder constraintsBuilder = new CalendarConstraints.Builder();
+        constraintsBuilder.setValidator(new FutureDateValidator());
+        Calendar futureMonth = Calendar.getInstance();
 
         MaterialDatePicker.Builder<Long> builder = MaterialDatePicker.Builder.datePicker();
         builder.setTitleText("Selecciona la fecha");
@@ -139,18 +149,18 @@ public class RealizarReservaFragment extends Fragment {
                 calendar.setTimeInMillis(selection);
 
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
-                int month = calendar.get(Calendar.MONTH);
+                int month = calendar.get(Calendar.MONTH) + 1;
                 int year = calendar.get(Calendar.YEAR);
-                String selectedDate = day + "/" + month + "/" + year ;
+                String selectedDate = day + "/" + month + "/" + year;
 
-                Toast.makeText(RealizarReservaFragment.this.getContext(), "Fecha seleccionada: " + selectedDate , Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Fecha seleccionada: " + selectedDate, Toast.LENGTH_LONG).show();
                 etDate.setText(selectedDate);
             }
         });
 
         materialDatePicker.show(getChildFragmentManager(), "MATERIAL_DATE_PICKER");
+    }
 
-    };
 
     public void createTimePicker(EditText etTime) {
         int hour = 8;
@@ -177,6 +187,27 @@ public class RealizarReservaFragment extends Fragment {
 
         timePicker.show(getActivity().getSupportFragmentManager(), "timePicker");
     }
+    private void updateAdapterWithSelectedChipType() {
+        if (adapter != null) {
+            adapter.setChipType(selectedChipType);
+            adapter.notifyDataSetChanged();
+        }
+    }
 
+    public  void updateRecyclerView(View rootView, String selectedChipType){
+        recyclerView = rootView.findViewById(R.id.recyclerViewCards);
+        recyclerView.setHasFixedSize(true);
+
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 5, GridLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+
+        dataSet = new ArrayList<Integer>();
+        for (int i = 1; i <= 10; i++) {
+            dataSet.add(i);
+        }
+
+        adapter = new PlazaAdapter(dataSet, getContext(), selectedChipType);
+        recyclerView.setAdapter(adapter);
+    }
 
 }

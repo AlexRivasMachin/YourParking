@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -119,8 +120,16 @@ public class MainFragment extends Fragment {
     private void obtenerUbicacionYAbrirGoogleMaps() {
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
-        if (mapIntent.resolveActivity(requireActivity().getPackageManager()) != null) {
-            startActivity(mapIntent);
+        try {
+            if (mapIntent.resolveActivity(requireActivity().getPackageManager()) != null) {
+                startActivity(mapIntent);
+            } else {
+                Toast.makeText(requireContext(), "Google Maps no está instalado en el dispositivo", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            Toast.makeText(requireContext(), "Error al abrir Google Maps: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
         }
     }
+
 }

@@ -1,13 +1,16 @@
 package com.lksnext.arivas.domain;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lksnext.arivas.R;
@@ -18,10 +21,23 @@ public class PlazaAdapter extends RecyclerView.Adapter<PlazaAdapter.PlazaViewHol
 
     private List<Integer> dataSet;
     private Context context;
+    private String chipType;
 
-    public PlazaAdapter(List<Integer> dataSet, Context context) {
+    public PlazaAdapter(List<Integer> dataSet, Context context, String chipType) {
         this.dataSet = dataSet;
         this.context = context;
+        this.chipType = chipType;
+    }
+
+    public void updateDataSet(List<Integer> newDataSet) {
+        dataSet.clear();
+        dataSet.addAll(newDataSet);
+        notifyDataSetChanged();
+    }
+
+    public void setChipType(String chipType) {
+        this.chipType = chipType;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -36,12 +52,8 @@ public class PlazaAdapter extends RecyclerView.Adapter<PlazaAdapter.PlazaViewHol
         Integer numeroReserva = dataSet.get(position);
         holder.bind(numeroReserva);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                //LinearLayout linearLayout = itemView.
-            }
-        });
+        int drawableId = getDrawableIdForChipType(chipType);
+        holder.tipoReservaImagetView.setImageResource(drawableId);
     }
 
     @Override
@@ -52,14 +64,29 @@ public class PlazaAdapter extends RecyclerView.Adapter<PlazaAdapter.PlazaViewHol
     public class PlazaViewHolder extends RecyclerView.ViewHolder {
 
         private TextView numeroReservaTextView;
+        private ImageView tipoReservaImagetView;
 
         public PlazaViewHolder(@NonNull View itemView) {
             super(itemView);
             numeroReservaTextView = itemView.findViewById(R.id.NumReserva);
+            tipoReservaImagetView = itemView.findViewById(R.id.tipoReserva);
         }
 
         public void bind(Integer numeroReserva) {
             numeroReservaTextView.setText(String.valueOf(numeroReserva));
+        }
+    }
+
+    private int getDrawableIdForChipType(String chipType) {
+        switch (chipType) {
+            case "MOTO":
+                return R.drawable.moto;
+            case "DISC":
+                return R.drawable.discapacitado;
+            case "ELEC":
+                return R.drawable.electrico;
+            default:
+                return R.drawable.auto;
         }
     }
 }

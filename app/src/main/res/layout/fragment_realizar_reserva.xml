@@ -7,40 +7,11 @@
     android:layout_margin="10dp"
     tools:context=".view.fragment.reservas.RealizarReservaFragment">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/et_date"
-        style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:clipToOutline="true"
-        android:focusable="false"
-        android:hint="Selecciona la fecha"
-        android:textColorHint="@color/m3_textfield_input_text_color"
-        app:layout_constraintTop_toBottomOf="@+id/chipGroup"
-        tools:ignore="DuplicateIds,MissingConstraints"
-        tools:layout_editor_absoluteX="0dp" />
-
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/et_time_entry"
-        style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:clickable="true"
-        android:focusable="false"
-        android:hint="Selecciona la hora de entrada"
-        android:textColorHint="@color/m3_textfield_input_text_color"
-        app:layout_constraintTop_toBottomOf="@+id/et_date"
-        tools:ignore="DuplicateIds,MissingConstraints"
-        tools:layout_editor_absoluteX="0dp" />
-
     <TextView
         android:id="@+id/TitulRealizarReserva"
         android:layout_width="203dp"
         android:layout_height="37dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="20dp"
         android:text="@string/title_realizar_reserva"
         android:textAlignment="textStart"
         android:textSize="24sp"
@@ -48,7 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/volverImageRealizarReserva1"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
         tools:ignore="MissingConstraints" />
 
     <ImageView
@@ -68,24 +39,25 @@
         android:id="@+id/chipGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:layout_editor_absoluteX="24dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TitulRealizarReserva"
         app:singleSelection="true">
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip1"
+            android:id="@+id/STD"
             style="@style/Widget.Material3.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="Automovil "
+            android:text="Automovil"
             app:checkedIcon="@drawable/auto"
             app:chipIcon="@drawable/auto"
             app:chipIconVisible="true" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip2"
+            android:id="@+id/MOTO"
             style="@style/Widget.Material3.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -96,18 +68,18 @@
             app:chipIconVisible="true" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip3"
+            android:id="@+id/ELEC"
             style="@style/Widget.Material3.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="false"
-            android:text="Con estación de carga"
+            android:text="Estación de carga"
             app:checkedIcon="@drawable/electrico"
             app:chipIcon="@drawable/electrico"
             app:chipIconVisible="true" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip4"
+            android:id="@+id/DISC"
             style="@style/Widget.Material3.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -116,75 +88,102 @@
             app:checkedIcon="@drawable/discapacitado"
             app:chipIcon="@drawable/discapacitado"
             app:chipIconVisible="true" />
-
     </com.google.android.material.chip.ChipGroup>
-
-    <ImageView
-        android:id="@+id/volverImageRealizarReserva1"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="12dp"
-        android:src="@drawable/atras"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnContinuar"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="520dp"
         android:text="Confirmar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TitulRealizarReserva" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Tipo de plaza:"
-        app:layout_constraintTop_toBottomOf="@+id/TitulRealizarReserva"
-        tools:layout_editor_absoluteX="0dp"
-        tools:ignore="MissingConstraints" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/et_time_exit"
-        style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:clickable="true"
-        android:focusable="false"
         android:hint="Selecciona la hora de salida"
-        android:textColorHint="@color/m3_textfield_input_text_color"
-        app:layout_constraintTop_toBottomOf="@+id/et_date"
-        tools:ignore="DuplicateIds,MissingConstraints"
-        tools:layout_editor_absoluteX="16dp" />
+        app:layout_constraintTop_toBottomOf="@+id/textField3"
+        tools:ignore="MissingConstraints"
+        app:endIconDrawable="@drawable/clock_icon"
+        android:layout_marginBottom="10dp"
+        >
 
-    <TextView
-        android:id="@+id/tvCardSectionTitle"
-        android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_time_exit"
+            style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:clickable="true"
+            android:focusable="false"
+            android:textColorHint="@color/m3_textfield_input_text_color"
+            app:layout_constraintTop_toBottomOf="@+id/et_date"
+            tools:ignore="DuplicateIds,MissingConstraints"
+            tools:layout_editor_absoluteX="16dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textField2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Reservas:"
-        app:layout_constraintTop_toBottomOf="@id/et_time_exit"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        />
+        android:hint="Selecciona la fecha"
+        app:layout_constraintTop_toBottomOf="@+id/chipGroup"
+        tools:ignore="MissingConstraints"
+        app:endIconDrawable="@drawable/calendar_blank_icon"
+        android:layout_marginBottom="10dp"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_date"
+            style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:clipToOutline="true"
+            android:focusable="false"
+            android:textColorHint="@color/m3_textfield_input_text_color"
+            app:layout_constraintTop_toBottomOf="@+id/chipGroup"
+            tools:ignore="DuplicateIds,MissingConstraints"
+            tools:layout_editor_absoluteX="0dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textField3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Selecciona la hora de entrada"
+        app:layout_constraintTop_toBottomOf="@+id/textField2"
+        tools:ignore="MissingConstraints"
+        app:endIconDrawable="@drawable/clock_icon"
+        android:layout_marginBottom="10dp"
+        >
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_time_entry"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:clickable="true"
+            android:focusable="false"
+            android:textColorHint="@color/m3_textfield_input_text_color"
+            app:layout_constraintTop_toBottomOf="@+id/et_date"
+            tools:ignore="DuplicateIds,MissingConstraints"
+            tools:layout_editor_absoluteX="0dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCards"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/btnContinuar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvCardSectionTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/textField" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
