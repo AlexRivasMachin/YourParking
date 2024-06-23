@@ -9,16 +9,17 @@
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/et_date"
+        style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
+        android:clipToOutline="true"
         android:focusable="false"
         android:hint="Selecciona la fecha"
+        android:textColorHint="@color/m3_textfield_input_text_color"
         app:layout_constraintTop_toBottomOf="@+id/chipGroup"
         tools:ignore="DuplicateIds,MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"
-        android:clipToOutline="true"
-        style="@style/Widget.Material3.TextInputEditText.OutlinedBox"/>
+        tools:layout_editor_absoluteX="0dp" />
 
 
     <com.google.android.material.textfield.TextInputEditText
@@ -30,6 +31,7 @@
         android:clickable="true"
         android:focusable="false"
         android:hint="Selecciona la hora de entrada"
+        android:textColorHint="@color/m3_textfield_input_text_color"
         app:layout_constraintTop_toBottomOf="@+id/et_date"
         tools:ignore="DuplicateIds,MissingConstraints"
         tools:layout_editor_absoluteX="0dp" />
@@ -41,7 +43,6 @@
         android:layout_marginTop="8dp"
         android:text="@string/title_realizar_reserva"
         android:textAlignment="textStart"
-        android:textColor="?attr/colorOnSecondary"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -157,8 +158,32 @@
         android:clickable="true"
         android:focusable="false"
         android:hint="Selecciona la hora de salida"
+        android:textColorHint="@color/m3_textfield_input_text_color"
         app:layout_constraintTop_toBottomOf="@+id/et_date"
         tools:ignore="DuplicateIds,MissingConstraints"
         tools:layout_editor_absoluteX="16dp" />
+
+    <TextView
+        android:id="@+id/tvCardSectionTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reservas:"
+        app:layout_constraintTop_toBottomOf="@id/et_time_exit"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewCards"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnContinuar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvCardSectionTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,6 +11,9 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,14 +27,22 @@ import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 import com.lksnext.arivas.R;
+import com.lksnext.arivas.domain.CardAdapter;
+import com.lksnext.arivas.domain.PlazaAdapter;
 import com.lksnext.arivas.viewmodel.reservas.ReservasViewModel;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class RealizarReservaFragment extends Fragment {
 
     private NavController navController;
     private ReservasViewModel mViewModel;
+    private RecyclerView.LayoutManager layoutManager;
+    private RecyclerView recyclerView;
+    private PlazaAdapter adapter;
+    private List<Integer> dataSet;
 
     public static RealizarReservaFragment newInstance() {
         return new RealizarReservaFragment();
@@ -73,6 +84,24 @@ public class RealizarReservaFragment extends Fragment {
                 createTimePicker(etTimeExit);
             }
         });
+
+        // Configurar RecyclerView
+        recyclerView = rootView.findViewById(R.id.recyclerViewCards);
+        recyclerView.setHasFixedSize(true);
+
+        // Usar un GridLayoutManager para la disposición de las tarjetas
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 4, GridLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+
+        // Crear dataset
+        dataSet = new ArrayList<Integer>();
+        for (int i = 1; i <= 10; i++) {
+            dataSet.add(i);
+        }
+
+        // Crear y asignar el adaptador
+        adapter = new PlazaAdapter(dataSet, getContext());
+        recyclerView.setAdapter(adapter);
 
         return rootView;
     }

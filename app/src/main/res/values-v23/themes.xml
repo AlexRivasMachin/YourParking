@@ -11,7 +11,7 @@
         <item name="colorSecondaryVariant">@color/blue_main</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/blue_main</item>
+        <item name="android:statusBarColor">@color/black</item>
         <!-- Customize your theme here. -->
         <item name="android:textColorHint">@color/blue_traslucent</item>
         <item name="android:windowLightStatusBar">false</item>
@@ -39,7 +39,7 @@
 
     <style name="Theme.ParkingLKS" parent="Base.Theme.ParkingLKS">
         <!-- Navigation bar color. -->
-        <item name="android:navigationBarColor">@color/blue_traslucent3</item>
+        <item name="android:navigationBarColor">@color/white_secondary</item>
         <item name="android:windowLightStatusBar">false</item>
         <!-- Navigation icon color. -->
         <item name="navigationIconTint">?attr/colorPrimary</item>

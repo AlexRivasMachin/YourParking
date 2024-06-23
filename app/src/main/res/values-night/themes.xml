@@ -11,7 +11,7 @@
         <item name="colorSecondaryVariant">@color/blue_main</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/blue_main</item>
+        <item name="android:statusBarColor">@color/black</item>
         <!-- Customize your theme here. -->
         <item name="android:textColorHint">@color/blue_traslucent</item>
         <item name="android:windowLightStatusBar">false</item>

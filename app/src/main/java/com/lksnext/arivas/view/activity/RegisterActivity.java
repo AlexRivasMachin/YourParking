@@ -1,13 +1,16 @@
 package com.lksnext.arivas.view.activity;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.lksnext.arivas.R;
 import com.lksnext.arivas.databinding.ActivityRegisterBinding;
 import com.lksnext.arivas.viewmodel.login.RegisterViewModel;
 
@@ -31,10 +34,23 @@ public class    RegisterActivity extends AppCompatActivity {
                String email = binding.mailInputLayout.getEditText().getText().toString();
                String password = binding.ContraseAInputLayout.getEditText().getText().toString();
 
+               if (email.isEmpty() || password.isEmpty()) {
+                   showAlertDialog("Por favor, completa todos los campos.");
+                   return;
+               }
+
                FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
                        .addOnCompleteListener(task -> {
                            if (task.isSuccessful()) {
+                               SharedPreferences prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
+                               SharedPreferences.Editor editor = prefs.edit();
+                               editor.putString("email", email);
+                               editor.putString("provider", ProviderType.BASIC.name());
+                               editor.apply();
+
+                               // Ir a la actividad principal
                                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                               intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                startActivity(intent);
                            }
                             else {

@@ -26,7 +26,6 @@
         android:layout_marginTop="60dp"
         android:text="@string/title_Reservas_Activas"
         android:textAlignment="textStart"
-        android:textColor="?attr/colorOnSecondary"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

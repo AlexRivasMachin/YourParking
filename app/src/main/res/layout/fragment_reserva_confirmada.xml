@@ -97,7 +97,6 @@
         android:layout_marginTop="16dp"
         android:text="@string/title_reserva_confirmada"
         android:textAlignment="textStart"
-        android:textColor="?attr/colorOnSecondary"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

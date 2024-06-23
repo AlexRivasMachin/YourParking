@@ -36,23 +36,31 @@ public class LoginActivity extends AppCompatActivity {
                 String email = binding.NombreUsuariolayout.getEditText().getText().toString();
                 String password = binding.ContraseAInputLayout.getEditText().getText().toString();
 
+                if (email.isEmpty() || password.isEmpty()) {
+                    showAlertDialog("Por favor, completa todos los campos.");
+                    return;
+                }
+
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-
+                                // Guardar datos en SharedPreferences
                                 SharedPreferences prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = prefs.edit();
                                 editor.putString("email", email);
                                 editor.putString("provider", ProviderType.BASIC.name());
                                 editor.apply();
 
+                                // Ir a la actividad principal
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
-                            }
-                            else {
-                                showAlertDialog("Error al registrar el usuario");
+                            } else {
+                                // Mostrar mensaje de error en caso de fallo en la autenticación
+                                showAlertDialog("Error al iniciar sesión");
                             }
                         });
+
             }
         });
 

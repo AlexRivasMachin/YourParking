@@ -6,13 +6,10 @@
         android:id="@+id/inicio"
         android:title="@string/title_inico"
         android:icon="@drawable/ic_inicio"/>
-    <item
-        android:id="@+id/reservas"
-        android:title="@string/title_Reservas_Activas"
-        android:icon="@drawable/ic_reservas_pasadas"/>
+
     <item
         android:id="@+id/reservasPasadas"
-        android:title="@string/title_Reservas_Activas"
+        android:title="@string/title_Reservas_pasadas"
         android:icon="@drawable/ic_reservas"/>
 
 </menu>
