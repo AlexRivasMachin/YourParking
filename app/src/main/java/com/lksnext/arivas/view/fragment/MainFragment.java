@@ -119,10 +119,7 @@ public class MainFragment extends Fragment {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted, proceed to get location and open Google Maps
                 obtenerUbicacionYAbrirGoogleMaps();
-            } else {
-                // Permission denied, handle this as needed (e.g., show a message)
             }
         }
     }
