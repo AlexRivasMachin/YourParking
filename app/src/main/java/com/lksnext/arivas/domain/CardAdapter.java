@@ -5,16 +5,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.button.MaterialButton;
 import com.lksnext.arivas.R;
+import com.lksnext.arivas.view.activity.MainActivity;
 
 import java.util.List;
 
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder> {
     private List<Integer> dataSet;
-
+    private FragmentManager fragmentManager;
 
     public static class CardViewHolder extends RecyclerView.ViewHolder {
         public TextView numReserva, fechaReserva, horaReserva, estadoReserva;
@@ -30,8 +34,9 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         }
     }
 
-    public CardAdapter(List<Integer> dataSet) {
+    public CardAdapter(FragmentManager fragmentManager ,List<Integer> dataSet) {
         this.dataSet = dataSet;
+        this.fragmentManager = fragmentManager;
     }
 
     @Override
@@ -42,10 +47,21 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
     }
 
     @Override
-    public void onBindViewHolder(CardViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
         holder.numReserva.setText(String.valueOf(dataSet.get(position)));
-        // Configura los demás TextViews y el botón aquí si es necesario
+
+        // Configura los demás TextViews aquí si es necesario
+
+        holder.verReservaButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Mostrar el BottomSheet al hacer clic en el botón
+                BottomSheetDialogFragment bottomSheet = new ReservaBottomSheet();
+                bottomSheet.show(fragmentManager, bottomSheet.getTag());
+            }
+        });
     }
+
 
     @Override
     public int getItemCount() {

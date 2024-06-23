@@ -49,9 +49,6 @@ public class MainActivity extends AppCompatActivity {
             if (itemId == R.id.inicio) {
                 navController.navigate(R.id.mainFragment);
                 return true;
-            } else if (itemId == R.id.reservas) {
-                navController.navigate(R.id.reservasFragment);
-                return true;
             } else if (itemId == R.id.reservasPasadas) {
                 navController.navigate(R.id.reservasPasadasFragment);
                 return true;
