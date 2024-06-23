@@ -41,7 +41,6 @@ public class MainFragment extends Fragment {
 
 
     public MainFragment() {
-        // Required empty public constructor
     }
 
     public static MainFragment newInstance() {
@@ -50,10 +49,8 @@ public class MainFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
-        // Button to navigate to SettingsActivity
         MaterialButton settingButton = rootView.findViewById(R.id.btnGoToSettings);
         settingButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +60,6 @@ public class MainFragment extends Fragment {
             }
         });
 
-        // Button to navigate to another fragment (assuming you have a navigation graph)
         MaterialButton realizarReservaButton = rootView.findViewById(R.id.btnRealizarReserva);
         realizarReservaButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,12 +68,10 @@ public class MainFragment extends Fragment {
             }
         });
 
-        // Button to open Google Maps
         MaterialButton comoLlegarButton = rootView.findViewById(R.id.comollegar);
         comoLlegarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Check and request location permission if needed
                 if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
                         != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(requireActivity(),
@@ -89,13 +83,11 @@ public class MainFragment extends Fragment {
             }
         });
 
-        // RecyclerView setup
         recyclerView = rootView.findViewById(R.id.recyclerViewCards);
         recyclerView.setHasFixedSize(true);
         layoutManager = new GridLayoutManager(getContext(), 1, GridLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
-        // Dummy data for RecyclerView
         List<Integer> dataSet = new ArrayList<>();
         for (int i = 1; i <= 10; i++) {
             dataSet.add(i);
@@ -125,8 +117,6 @@ public class MainFragment extends Fragment {
     }
 
     private void obtenerUbicacionYAbrirGoogleMaps() {
-        // Replace with logic to obtain actual device location
-        // For demo purposes, opening Google Maps with a sample location (Googleplex)
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
         if (mapIntent.resolveActivity(requireActivity().getPackageManager()) != null) {
