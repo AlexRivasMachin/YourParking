@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -34,6 +35,13 @@ public class PlazaAdapter extends RecyclerView.Adapter<PlazaAdapter.PlazaViewHol
     public void onBindViewHolder(@NonNull PlazaViewHolder holder, int position) {
         Integer numeroReserva = dataSet.get(position);
         holder.bind(numeroReserva);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                //LinearLayout linearLayout = itemView.
+            }
+        });
     }
 
     @Override
@@ -44,17 +52,14 @@ public class PlazaAdapter extends RecyclerView.Adapter<PlazaAdapter.PlazaViewHol
     public class PlazaViewHolder extends RecyclerView.ViewHolder {
 
         private TextView numeroReservaTextView;
-        // Puedes añadir más vistas aquí según las necesidades
 
         public PlazaViewHolder(@NonNull View itemView) {
             super(itemView);
             numeroReservaTextView = itemView.findViewById(R.id.NumReserva);
-            // Inicializa más vistas si es necesario
         }
 
         public void bind(Integer numeroReserva) {
             numeroReservaTextView.setText(String.valueOf(numeroReserva));
-            // Puedes establecer más datos en otras vistas si es necesario
         }
     }
 }

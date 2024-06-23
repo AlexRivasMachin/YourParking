@@ -2,7 +2,8 @@ package com.lksnext.arivas.view.fragment.reservas;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.icu.util.Calendar;
+import java.util.Calendar;
+import java.util.TimeZone;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,16 +20,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TimePicker;
+import android.widget.Toast;
 
+import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 import com.lksnext.arivas.R;
 import com.lksnext.arivas.domain.CardAdapter;
 import com.lksnext.arivas.domain.PlazaAdapter;
+import com.lksnext.arivas.view.fragment.MainFragment;
 import com.lksnext.arivas.viewmodel.reservas.ReservasViewModel;
 
 import java.util.ArrayList;
@@ -90,7 +93,7 @@ public class RealizarReservaFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
 
         // Usar un GridLayoutManager para la disposición de las tarjetas
-        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 4, GridLayoutManager.VERTICAL, false);
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 5, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
         // Crear dataset
@@ -117,14 +120,33 @@ public class RealizarReservaFragment extends Fragment {
     }
 
     public void createDatePicker(EditText etDate) {
-        final Calendar c = Calendar.getInstance();
-        int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH);
-        int day = c.get(Calendar.DAY_OF_MONTH);
+
+        long today = MaterialDatePicker.todayInUtcMilliseconds();
+
+        CalendarConstraints.Builder constraintsBuilder = new CalendarConstraints.Builder();
 
         MaterialDatePicker.Builder<Long> builder = MaterialDatePicker.Builder.datePicker();
         builder.setTitleText("Selecciona la fecha");
-        MaterialDatePicker<Long> materialDatePicker = builder.build();
+        builder.setSelection(today);
+        builder.setCalendarConstraints(constraintsBuilder.build());
+
+        final MaterialDatePicker<Long> materialDatePicker = builder.build();
+
+        materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Long>() {
+            @Override
+            public void onPositiveButtonClick(Long selection) {
+                Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+                calendar.setTimeInMillis(selection);
+
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                int month = calendar.get(Calendar.MONTH);
+                int year = calendar.get(Calendar.YEAR);
+                String selectedDate = day + "/" + month + "/" + year ;
+
+                Toast.makeText(RealizarReservaFragment.this.getContext(), "Fecha seleccionada: " + selectedDate , Toast.LENGTH_LONG).show();
+                etDate.setText(selectedDate);
+            }
+        });
 
         materialDatePicker.show(getChildFragmentManager(), "MATERIAL_DATE_PICKER");
 
@@ -148,6 +170,8 @@ public class RealizarReservaFragment extends Fragment {
                 int hourOfDay = timePicker.getHour();
                 int minute = timePicker.getMinute();
                 etTime.setText(String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute));
+                Toast.makeText(RealizarReservaFragment.this.getContext(), "Hora seleccionada: " + hourOfDay + ":" + minute , Toast.LENGTH_LONG).show();
+
             }
         });
 

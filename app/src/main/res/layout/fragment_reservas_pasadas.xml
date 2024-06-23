@@ -51,6 +51,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="¡Vaya! Parece que no hay reservas de este tipo."
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView7"
-        tools:layout_editor_absoluteX="37dp" />
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

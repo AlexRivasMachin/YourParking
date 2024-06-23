@@ -50,18 +50,14 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
     public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
         holder.numReserva.setText(String.valueOf(dataSet.get(position)));
 
-        // Configura los demás TextViews aquí si es necesario
-
         holder.verReservaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Mostrar el BottomSheet al hacer clic en el botón
                 BottomSheetDialogFragment bottomSheet = new ReservaBottomSheet();
                 bottomSheet.show(fragmentManager, bottomSheet.getTag());
             }
         });
     }
-
 
     @Override
     public int getItemCount() {

@@ -17,7 +17,8 @@
         android:textColor="@color/blue_main"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/Día"
-        tools:layout_editor_absoluteX="128dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/DiaEntrada"
@@ -78,7 +79,9 @@
         android:id="@+id/TipoPlaza"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="109dp"
         android:text="Tipo de plaza:"
+        app:layout_constraintBottom_toTopOf="@+id/btnVerReserva"
         app:layout_constraintTop_toBottomOf="@+id/HoraSalida"
         tools:layout_editor_absoluteX="90dp" />
 
@@ -121,10 +124,11 @@
         android:id="@+id/volverImageReservaConfirmada"
         android:layout_width="24dp"
         android:layout_height="24dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/atras"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        tools:layout_editor_absoluteX="25dp"
         tools:ignore="MissingConstraints" />
 
     <com.google.android.material.button.MaterialButton
@@ -143,8 +147,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="33dp"
         android:src="@drawable/coche_normal"
-        app:layout_constraintTop_toBottomOf="@+id/TituloReservaConfirmada"
-        tools:layout_editor_absoluteX="87dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TituloReservaConfirmada" />
 
     <TextView
         android:id="@+id/plaza"
@@ -160,7 +165,8 @@
         android:text="Plaza"
         android:textColor="@color/design_default_color_on_primary"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6"
-        tools:layout_editor_absoluteX="169dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
