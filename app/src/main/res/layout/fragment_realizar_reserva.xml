@@ -120,6 +120,7 @@
             android:focusable="false"
             android:textColorHint="@color/m3_textfield_input_text_color"
             app:layout_constraintTop_toBottomOf="@+id/et_date"
+            app:endIconDrawable="@drawable/clock_icon"
             tools:ignore="DuplicateIds,MissingConstraints"
             tools:layout_editor_absoluteX="16dp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -146,6 +147,7 @@
             android:textColorHint="@color/m3_textfield_input_text_color"
             app:layout_constraintTop_toBottomOf="@+id/chipGroup"
             tools:ignore="DuplicateIds,MissingConstraints"
+            app:endIconDrawable="@drawable/calendar_blank_icon"
             tools:layout_editor_absoluteX="0dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -171,6 +173,7 @@
             android:focusable="false"
             android:textColorHint="@color/m3_textfield_input_text_color"
             app:layout_constraintTop_toBottomOf="@+id/et_date"
+            app:endIconDrawable="@drawable/clock_icon"
             tools:ignore="DuplicateIds,MissingConstraints"
             tools:layout_editor_absoluteX="0dp" />
 

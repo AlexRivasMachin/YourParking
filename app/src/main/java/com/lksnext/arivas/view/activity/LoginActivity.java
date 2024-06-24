@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.lksnext.arivas.R;
 import com.lksnext.arivas.databinding.ActivityLoginBinding;
 import com.lksnext.arivas.viewmodel.login.LoginViewModel;
@@ -23,14 +24,17 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Asignamos la vista/interfaz login (layout)
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        //Asignamos el viewModel de login
+        if (getCurrentUser() != null) {
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
-        //Acciones a realizar cuando el usuario clica el boton de login
         binding.iniciarSesion.setOnClickListener(v -> {
             if (binding.NombreUsuariolayout.getEditText() != null && binding.ContraseAInputLayout.getEditText() != null) {
                 String email = binding.NombreUsuariolayout.getEditText().getText().toString();
@@ -44,19 +48,16 @@ public class LoginActivity extends AppCompatActivity {
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
-                                // Guardar datos en SharedPreferences
                                 SharedPreferences prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = prefs.edit();
                                 editor.putString("email", email);
                                 editor.putString("provider", ProviderType.BASIC.name());
                                 editor.apply();
 
-                                // Ir a la actividad principal
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                Intent intent = new Intent(this, MainActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
                             } else {
-                                // Mostrar mensaje de error en caso de fallo en la autenticación
                                 showAlertDialog("Error al iniciar sesión");
                             }
                         });
@@ -64,23 +65,18 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        //Acciones a realizar cuando el usuario clica el boton de crear cuenta (se cambia de pantalla)
         binding.registrarse.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
         });
 
-        //Observamos la variable logged, la cual nos informara cuando el usuario intente hacer login y se
-        //cambia de pantalla en caso de login correcto
         loginViewModel.isLogged().observe(this, logged -> {
             if (logged != null) {
                 if (logged) {
-                    //Login Correcto
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 } else {
-                    //Login incorrecto
                 }
             }
         });
@@ -93,5 +89,9 @@ public class LoginActivity extends AppCompatActivity {
         builder.setPositiveButton("Aceptar", null);
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    public FirebaseUser getCurrentUser() {
+        return FirebaseAuth.getInstance().getCurrentUser();
     }
 }

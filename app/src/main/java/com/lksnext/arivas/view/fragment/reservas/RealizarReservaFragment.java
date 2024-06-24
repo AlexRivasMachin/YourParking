@@ -4,6 +4,7 @@ import static androidx.databinding.adapters.CompoundButtonBindingAdapter.setChec
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.TimeZone;
 import android.os.Bundle;
 
@@ -33,10 +34,15 @@ import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClic
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 import com.google.android.material.chip.Chip;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.ktx.Firebase;
 import com.lksnext.arivas.R;
 import com.lksnext.arivas.domain.CardAdapter;
 import com.lksnext.arivas.domain.FutureDateValidator;
 import com.lksnext.arivas.domain.PlazaAdapter;
+import com.lksnext.arivas.domain.Reservation;
 import com.lksnext.arivas.view.fragment.MainFragment;
 import com.lksnext.arivas.viewmodel.reservas.ReservasViewModel;
 
@@ -51,9 +57,10 @@ public class RealizarReservaFragment extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView recyclerView;
     private PlazaAdapter adapter;
-    private List<Integer> dataSet;
-
+    private List<String> dataSet;
+    private FirebaseFirestore firestore;
     private  String selectedChipType;
+    private String selectedChip;
 
 
     public static RealizarReservaFragment newInstance() {
@@ -62,17 +69,8 @@ public class RealizarReservaFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View rootView = inflater.inflate(R.layout.fragment_realizar_reserva, container, false);
-        Button continuarReservaButton = rootView.findViewById(R.id.btnContinuar);
-        continuarReservaButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    NavController navController = NavHostFragment.findNavController(RealizarReservaFragment.this);
-                    navController.navigate(R.id.confirmarReservaFragment);
-                }
-            }
-        );
+        firestore = FirebaseFirestore.getInstance();
 
         ChipGroup chipGroup = rootView.findViewById(R.id.chipGroup);
 
@@ -80,7 +78,7 @@ public class RealizarReservaFragment extends Fragment {
             @Override
             public void onCheckedChanged(@NonNull ChipGroup group, @NonNull List<Integer> checkedIds) {
                 if (checkedIds.isEmpty()) {
-                    Chip lastCheckedChip = group.findViewById(R.id.STD); // Default chip ID
+                    Chip lastCheckedChip = group.findViewById(R.id.STD);
                     lastCheckedChip.setChecked(true);
                     updateRecyclerView(rootView, "STD");
                 } else {
@@ -104,7 +102,7 @@ public class RealizarReservaFragment extends Fragment {
         etTimeEntry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createTimePicker(etTimeEntry);
+                createTimePicker(etTimeEntry, null);
             }
         });
 
@@ -112,9 +110,33 @@ public class RealizarReservaFragment extends Fragment {
         etTimeExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createTimePicker(etTimeExit);
+                createTimePicker(etTimeExit, etTimeEntry);
             }
         });
+
+        Button continuarReservaButton = rootView.findViewById(R.id.btnContinuar);
+        continuarReservaButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (areAllFieldsCompleted(rootView)) {
+//                    addReservation();
+
+//                    Bundle bundle = new Bundle();
+//                    bundle.putString("selectedChipType", selectedChipType);
+//                    bundle.putString("selectedChip", selectedChip);
+//                    bundle.putString("reservationDate", etDate.getText().toString());
+//                    bundle.putString("timeEntry", etTimeEntry.getText().toString());
+//                    bundle.putString("timeExit", etTimeExit.getText().toString());
+
+                    navController.navigate(R.id.confirmarReservaFragment);
+                } else {
+                    Toast.makeText(getContext(), "Por favor, complete todos los campos.", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+
+        updateRecyclerView(rootView, "STD");
 
         return rootView;
     }
@@ -122,10 +144,8 @@ public class RealizarReservaFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Obtener el NavController
         navController = Navigation.findNavController(view);
 
-        // Configurar OnClickListener para la imagen de volver
     }
 
     public void createDatePicker(EditText etDate) {
@@ -162,7 +182,7 @@ public class RealizarReservaFragment extends Fragment {
     }
 
 
-    public void createTimePicker(EditText etTime) {
+    public void createTimePicker(EditText etTime, @Nullable EditText etTimeEntry) {
         int hour = 8;
         int minute = 0;
 
@@ -170,7 +190,7 @@ public class RealizarReservaFragment extends Fragment {
                 .setTimeFormat(TimeFormat.CLOCK_24H)
                 .setHour(hour)
                 .setMinute(minute)
-                .setTitleText("Select Time");
+                .setTitleText("Selecciona la hora");
 
         MaterialTimePicker timePicker = timePickerBuilder.build();
 
@@ -179,14 +199,41 @@ public class RealizarReservaFragment extends Fragment {
             public void onClick(View v) {
                 int hourOfDay = timePicker.getHour();
                 int minute = timePicker.getMinute();
-                etTime.setText(String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute));
-                Toast.makeText(RealizarReservaFragment.this.getContext(), "Hora seleccionada: " + hourOfDay + ":" + minute , Toast.LENGTH_LONG).show();
+                String selectedTime = String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute);
 
+                if (etTimeEntry != null) { // Estamos seleccionando la hora de salida
+                    String entryTime = etTimeEntry.getText().toString();
+                    if (!entryTime.isEmpty()) {
+                        String[] parts = entryTime.split(":");
+                        int entryHour = Integer.parseInt(parts[0]);
+                        int entryMinute = Integer.parseInt(parts[1]);
+
+                        Calendar calendarEntry = Calendar.getInstance();
+                        calendarEntry.set(Calendar.HOUR_OF_DAY, entryHour);
+                        calendarEntry.set(Calendar.MINUTE, entryMinute);
+
+                        Calendar calendarExit = Calendar.getInstance();
+                        calendarExit.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                        calendarExit.set(Calendar.MINUTE, minute);
+
+                        long difference = calendarExit.getTimeInMillis() - calendarEntry.getTimeInMillis();
+                        if (difference > 8 * 60 * 60 * 1000) { // Más de 8 horas
+                            calendarExit.setTimeInMillis(calendarEntry.getTimeInMillis() + 8 * 60 * 60 * 1000);
+                            hourOfDay = calendarExit.get(Calendar.HOUR_OF_DAY);
+                            minute = calendarExit.get(Calendar.MINUTE);
+                            selectedTime = String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute);
+                        }
+                    }
+                }
+
+                etTime.setText(selectedTime);
+                Toast.makeText(RealizarReservaFragment.this.getContext(), "Hora seleccionada: " + selectedTime, Toast.LENGTH_LONG).show();
             }
         });
 
         timePicker.show(getActivity().getSupportFragmentManager(), "timePicker");
     }
+
     private void updateAdapterWithSelectedChipType() {
         if (adapter != null) {
             adapter.setChipType(selectedChipType);
@@ -198,16 +245,78 @@ public class RealizarReservaFragment extends Fragment {
         recyclerView = rootView.findViewById(R.id.recyclerViewCards);
         recyclerView.setHasFixedSize(true);
 
-        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 5, GridLayoutManager.VERTICAL, false);
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 4, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
-        dataSet = new ArrayList<Integer>();
-        for (int i = 1; i <= 10; i++) {
-            dataSet.add(i);
-        }
-
+        dataSet = new ArrayList<String>();
         adapter = new PlazaAdapter(dataSet, getContext(), selectedChipType);
         recyclerView.setAdapter(adapter);
+
+        firestore.collection("parking_slots")
+                .whereEqualTo("type", selectedChipType)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        List<Integer> newDataSet = new ArrayList<>();
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            String id = document.getId();
+                            String numeroPlaza = id.replaceAll("[^0-9]","");
+                            dataSet.add(numeroPlaza);
+                            Collections.sort(dataSet);
+                        }
+                        adapter.notifyDataSetChanged();
+                    } else {
+                        Toast.makeText(getContext(), "Error obteniendo datos", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
+    private boolean areAllFieldsCompleted(View rootView) {
+        ChipGroup chipGroup = rootView.findViewById(R.id.chipGroup);
+        EditText etDate = rootView.findViewById(R.id.et_date);
+        EditText etTimeEntry = rootView.findViewById(R.id.et_time_entry);
+        EditText etTimeExit = rootView.findViewById(R.id.et_time_exit);
+
+        RecyclerView recyclerView = rootView.findViewById(R.id.recyclerViewCards);
+        PlazaAdapter adapter = (PlazaAdapter) recyclerView.getAdapter();
+        boolean isAnyRecyclerViewChipSelected = false;
+
+        for (int i = 0; i < adapter.getItemCount(); i++) {
+            PlazaAdapter.PlazaViewHolder holder = (PlazaAdapter.PlazaViewHolder) recyclerView.findViewHolderForAdapterPosition(i);
+            if (holder != null && adapter.isItemSelected() ) {
+                selectedChip = adapter.getSelectedItem();
+                isAnyRecyclerViewChipSelected = true;
+                break;
+            }
+        }
+
+        if (!isAnyRecyclerViewChipSelected) {
+            return false;
+        }
+        if (chipGroup.getCheckedChipId() == View.NO_ID) {
+            return false;
+        }
+        if (etDate.getText().toString().isEmpty()) {
+            return false;
+        }
+        if (etTimeEntry.getText().toString().isEmpty()) {
+            return false;
+        }
+        if (etTimeExit.getText().toString().isEmpty()) {
+            return false;
+        }
+
+        return true;
+    }
+    public void addReservation(){
+        View rootView = getView();
+        EditText etDate = rootView.findViewById(R.id.et_date);
+        EditText etTimeEntry = rootView.findViewById(R.id.et_time_entry);
+        EditText etTimeExit = rootView.findViewById(R.id.et_time_exit);
+
+        Reservation reservation = new Reservation(FirebaseAuth.getInstance().getCurrentUser().getUid(), selectedChip, etDate.getText().toString(), etTimeEntry.getText().toString(), etTimeExit.getText().toString());
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("reservations")
+                .add(reservation);
+    }
 }

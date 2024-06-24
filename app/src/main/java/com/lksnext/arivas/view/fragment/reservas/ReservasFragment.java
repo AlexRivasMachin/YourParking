@@ -32,17 +32,13 @@ public class ReservasFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_reservas, container, false);
 
-        // Obtén una referencia al botón en tu diseño
         Button realizarReservaButton = rootView.findViewById(R.id.btnRealizarReserva);
 
-        // Configura un OnClickListener para el botón
         realizarReservaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Navega al fragmento fragmentRealizarReserva
                 NavController navController = NavHostFragment.findNavController(ReservasFragment.this);
                 navController.navigate(R.id.realizarReservaFragment);
             }

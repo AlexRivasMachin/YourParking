@@ -66,7 +66,7 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="194dp"
+                android:layout_height="160dp"
                 android:contentDescription="Imagen sobre la ubicaion del parking"
                 android:padding="0dp"
                 android:scaleType="centerCrop"
@@ -74,34 +74,56 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="bottom"
                 android:layout_margin="0dp"
                 android:background="@color/blue_traslucent2"
                 android:orientation="horizontal">
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+
                 <TextView
-                    android:id="@+id/Ubicacion"
+                    android:id="@+id/Ubicacion1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="12dp"
+                    android:text="Donostia-San Sebastian"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toBottomOf="@+id/card"
+                    tools:ignore="MissingConstraints"
+                    />
+
+                <TextView
+                    android:id="@+id/Ubicacion2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|left"
                     android:layout_marginStart="5dp"
-                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="12dp"
                     android:text="Parking de Zuatzu"
                     android:textSize="12sp"
                     app:layout_constraintTop_toBottomOf="@+id/card"
                     tools:ignore="MissingConstraints" />
 
+            </LinearLayout>
+
+
                 <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                     android:id="@+id/comollegar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="right"
                     android:layout_margin="16dp"
                     android:backgroundTint="@color/blue_main"
-                    android:text="Como llegar"
                     android:textSize="12sp"
-                    app:icon="@drawable/location" />
+                    app:icon="@drawable/near_me" />
 
             </LinearLayout>
 

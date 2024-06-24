@@ -1,11 +1,11 @@
 package com.lksnext.arivas.domain;
 
 public class Reservation {
-    private String uid;         // UID del usuario que realiza la reserva
-    private String slotId;      // ID del slot reservado
-    private String date;        // Fecha de la reserva (formato a definir)
-    private String in;          // Hora de entrada (ej. "10:00")
-    private String out;         // Hora de salida (ej. "12:00")
+    private String uid;
+    private String slotId;
+    private String date;
+    private String in;
+    private String out;
 
     public Reservation() {
         // Constructor vacío requerido para Firebase
