@@ -119,22 +119,21 @@ public class RealizarReservaFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (areAllFieldsCompleted(rootView)) {
-//                    addReservation();
+                    addReservation();
 
-//                    Bundle bundle = new Bundle();
-//                    bundle.putString("selectedChipType", selectedChipType);
-//                    bundle.putString("selectedChip", selectedChip);
-//                    bundle.putString("reservationDate", etDate.getText().toString());
-//                    bundle.putString("timeEntry", etTimeEntry.getText().toString());
-//                    bundle.putString("timeExit", etTimeExit.getText().toString());
+                    Bundle bundle = new Bundle();
+                    bundle.putString("chipType", selectedChipType);
+                    bundle.putString("chip", selectedChip);
+                    bundle.putString("date", etDate.getText().toString());
+                    bundle.putString("entry", etTimeEntry.getText().toString());
+                    bundle.putString("exit", etTimeExit.getText().toString());
 
-                    navController.navigate(R.id.confirmarReservaFragment);
+                    navController.navigate(R.id.confirmarReservaFragment, bundle);
                 } else {
                     Toast.makeText(getContext(), "Por favor, complete todos los campos.", Toast.LENGTH_LONG).show();
                 }
             }
         });
-
 
         updateRecyclerView(rootView, "STD");
 
@@ -227,7 +226,7 @@ public class RealizarReservaFragment extends Fragment {
                 }
 
                 etTime.setText(selectedTime);
-                Toast.makeText(RealizarReservaFragment.this.getContext(), "Hora seleccionada: " + selectedTime, Toast.LENGTH_LONG).show();
+                Toast.makeText(RealizarReservaFragment.this.getContext(), "Hora seleccionada: " + selectedTime, Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -1,7 +1,7 @@
 package com.lksnext.arivas.view.fragment.reservas;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -9,50 +9,31 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
+import com.google.android.material.chip.Chip;
 import com.lksnext.arivas.R;
-import com.lksnext.arivas.viewmodel.reservas.ReservasViewModel;
+import com.lksnext.arivas.databinding.FragmentConfirmarReservaBinding;
 
 public class ConfirmarReservaFragment extends Fragment {
 
     private NavController navController;
-    private ReservasViewModel mViewModel;
+    private FragmentConfirmarReservaBinding binding;
 
-    private TextView tvSelectedChipType;
-    private TextView tvSelectedChip;
-    private TextView tvReservationDate;
-    private TextView tvTimeEntry;
-    private TextView tvTimeExit;
-
-    public static ConfirmarReservaFragment newInstance() {
-        return new ConfirmarReservaFragment();
-    }
+    private String tvSelectedChipType;
+    private String tvSelectedChip;
+    private String tvReservationDate;
+    private String tvTimeEntry;
+    private String tvTimeExit;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_confirmar_reserva, container, false);
-
-        Button confirmarReservaButton = rootView.findViewById(R.id.btnConfirmarReserva);
-
-        if (confirmarReservaButton != null) {
-            confirmarReservaButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    NavController navController = NavHostFragment.findNavController(ConfirmarReservaFragment.this);
-                    navController.navigate(R.id.mainFragment);
-                }
-            });
-        } else {
-            // Manejar el caso donde el botón no se encuentra
-            System.err.println("Botón btnConfirmarReserva no se encontró en el layout.");
-        }
-
-        return rootView;
+        binding = FragmentConfirmarReservaBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
@@ -61,36 +42,47 @@ public class ConfirmarReservaFragment extends Fragment {
 
         navController = Navigation.findNavController(view);
 
-        View volverImage = view.findViewById(R.id.volverImageConfirmarReserva);
-        if (volverImage != null) {
-            volverImage.setOnClickListener(v -> navController.popBackStack(R.id.realizarReservaFragment, false));
+        binding.btnConfirmarReserva.setOnClickListener(v -> {
+            navController.navigate(R.id.mainFragment);
+        });
+
+        if (getArguments() != null) {
+            tvSelectedChipType = getArguments().getString("chipType");
+            tvSelectedChip = getArguments().getString("chip");
+            tvReservationDate = getArguments().getString("date");
+            tvTimeEntry = getArguments().getString("entry");
+            tvTimeExit = getArguments().getString("exit");
+
+            if (tvSelectedChipType != null) {
+                setChip(binding.chipPlaza, tvSelectedChipType);
+            }
+            binding.tvFecha.setText(tvReservationDate);
+            binding.tvHoraInicio.setText(tvTimeEntry);
+            binding.tvHoraFin.setText(tvTimeExit);
         } else {
-            // Manejar el caso donde volverImage no se encuentra
-            System.err.println("View volverImageConfirmarReserva no se encontró en el layout.");
+            Log.e("ConfirmarReservaFragment", "No arguments found.");
         }
+    }
 
-        // Inicializar otros TextViews si son necesarios en esta parte del código
-//        tvSelectedChipType = view.findViewById(R.id.tvSelectedChipType);
-//        tvSelectedChip = view.findViewById(R.id.tvSelectedChip);
-//        tvReservationDate = view.findViewById(R.id.tvReservationDate);
-//        tvTimeEntry = view.findViewById(R.id.tvTimeEntry);
-//        tvTimeExit = view.findViewById(R.id.tvTimeExit);
-
-        // Verificar si los TextViews están correctamente referenciados
-        if (tvSelectedChipType == null) {
-            System.err.println("TextView tvSelectedChipType no se encontró en el layout.");
-        }
-        if (tvSelectedChip == null) {
-            System.err.println("TextView tvSelectedChip no se encontró en el layout.");
-        }
-        if (tvReservationDate == null) {
-            System.err.println("TextView tvReservationDate no se encontró en el layout.");
-        }
-        if (tvTimeEntry == null) {
-            System.err.println("TextView tvTimeEntry no se encontró en el layout.");
-        }
-        if (tvTimeExit == null) {
-            System.err.println("TextView tvTimeExit no se encontró en el layout.");
+    @SuppressLint("UseCompatLoadingForDrawables")
+    public void setChip(Chip chip, String chipType) {
+        chip.setText(chipType);
+        switch (chipType) {
+            case "STD":
+                chip.setChipIcon(getResources().getDrawable(R.drawable.auto));
+                break;
+            case "ELEC":
+                chip.setChipIcon(getResources().getDrawable(R.drawable.electrico));
+                break;
+            case "DISC":
+                chip.setChipIcon(getResources().getDrawable(R.drawable.discapacitado));
+                break;
+            case "MOT0":
+                chip.setChipIcon(getResources().getDrawable(R.drawable.motociclea));
+                break;
+            default:
+                Log.e("ConfirmarReservaFragment", "Invalid chip type.");
+                break;
         }
     }
 }
