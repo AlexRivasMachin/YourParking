@@ -331,6 +331,7 @@ public class RealizarReservaFragment extends Fragment {
         EditText etTimeExit = rootView.findViewById(R.id.et_time_exit);
 
         new MaterialAlertDialogBuilder(requireContext())
+                .setIcon(R.drawable.bookmark_add)
                 .setTitle("Confirmar reserva")
                 .setMessage("¿Quieres confirmar tu reserva de tipo " + selectedChipType + "?")
                 .setNegativeButton("Cancelar", null)

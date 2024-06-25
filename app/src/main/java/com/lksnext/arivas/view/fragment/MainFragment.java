@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -32,10 +33,14 @@ import com.lksnext.arivas.domain.PlazaAdapter;
 import com.lksnext.arivas.domain.Reservation;
 import com.lksnext.arivas.view.activity.SettingsActivity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 public class MainFragment extends Fragment {
@@ -128,7 +133,9 @@ public class MainFragment extends Fragment {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                             Reservation reservation = documentSnapshot.toObject(Reservation.class);
-                            userReservations.add(reservation);
+                            if (isNotPastReservation(reservation.getDate())) {
+                                userReservations.add(reservation);
+                            }
                         }
                         Collections.sort(userReservations, new Comparator<Reservation>() {
                             @Override
@@ -168,6 +175,45 @@ public class MainFragment extends Fragment {
             Toast.makeText(requireContext(), "Error al abrir Google Maps: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
+    }
+
+    public long stringToMilis(String dateString) {
+        return getTimeWithFixedHour(stringToDate(dateString), 20, 0);
+    }
+
+    public Date stringToDate(String dateString) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = null;
+        try {
+            date = dateFormat.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
+    }
+
+    public long getTimeWithFixedHour(Date date, int hourOfDay, int minute) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+
+        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        calendar.set(Calendar.MINUTE, minute);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+
+        return calendar.getTimeInMillis();
+    }
+    public long getYesterdayAtFixedHourMillis() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, -1);
+        return getTimeWithFixedHour(calendar.getTime(), 20, 0);
+    }
+
+    private boolean isNotPastReservation(String dateString) {
+        long reservationTimeMillis = stringToMilis(dateString);
+        long fixedHourMillis = getYesterdayAtFixedHourMillis(); // Obtener milisegundos con hora 20:00 de ayer
+
+        return reservationTimeMillis > fixedHourMillis;
     }
 
 }
