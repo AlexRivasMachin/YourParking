@@ -43,7 +43,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TitulRealizarReserva"
-        app:singleSelection="true">
+        app:singleSelection="true"
+        app:chipSpacingVertical="0dp"
+        >
 
         <com.google.android.material.chip.Chip
             android:id="@+id/STD"
@@ -180,7 +182,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewCards"
+        android:id="@+id/recyclerViewChips"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="16dp"

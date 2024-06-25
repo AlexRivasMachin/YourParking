@@ -6,17 +6,18 @@ public class Reservation {
     private String date;
     private String in;
     private String out;
+    private String type;
 
     public Reservation() {
-        // Constructor vacío requerido para Firebase
     }
 
-    public Reservation(String uid, String slotId, String date, String in, String out) {
+    public Reservation(String uid, String slotId, String date, String in, String out, String type) {
         this.uid = uid;
         this.slotId = slotId;
         this.date = date;
         this.in = in;
         this.out = out;
+        this.type = type;
     }
 
     public String getUid() {
@@ -57,6 +58,13 @@ public class Reservation {
 
     public void setOut(String out) {
         this.out = out;
+    }
+
+    public String getType(){
+        return type;
+    }
+    public void setType(String type){
+        this.type = type;
     }
 }
 /*

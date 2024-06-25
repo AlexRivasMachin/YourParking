@@ -1,40 +1,41 @@
 package com.lksnext.arivas.domain;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.chip.Chip;
 import com.lksnext.arivas.R;
-import com.lksnext.arivas.view.activity.MainActivity;
 
 import java.util.List;
 
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder> {
-    private List<Integer> dataSet;
+    private List<Reservation> dataSet;
     private FragmentManager fragmentManager;
 
     public static class CardViewHolder extends RecyclerView.ViewHolder {
-        public TextView numReserva, fechaReserva, horaReserva, estadoReserva;
-        public MaterialButton verReservaButton;
+        public Chip numReserva, fechaReserva, horaReserva;
+        public MaterialCardView card;
 
         public CardViewHolder(View view) {
             super(view);
-            numReserva = view.findViewById(R.id.NumReserva);
-            fechaReserva = view.findViewById(R.id.fechaReserva);
-            horaReserva = view.findViewById(R.id.horaReserva);
-            estadoReserva = view.findViewById(R.id.estadoReserva);
-            verReservaButton = view.findViewById(R.id.outlinedButton2);
+            numReserva = view.findViewById(R.id.reservation_reservation);
+            fechaReserva = view.findViewById(R.id.reservation_date);
+            horaReserva = view.findViewById(R.id.reservation_in);
+            card = view.findViewById(R.id.reservation_card);
         }
     }
 
-    public CardAdapter(FragmentManager fragmentManager ,List<Integer> dataSet) {
+    public CardAdapter(FragmentManager fragmentManager, List<Reservation> dataSet) {
         this.dataSet = dataSet;
         this.fragmentManager = fragmentManager;
     }
@@ -48,9 +49,33 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
-        holder.numReserva.setText(String.valueOf(dataSet.get(position)));
+        Reservation reservation = dataSet.get(position);
 
-        holder.verReservaButton.setOnClickListener(new View.OnClickListener() {
+        holder.numReserva.setText(reservation.getSlotId());
+        holder.fechaReserva.setText(reservation.getDate());
+        holder.horaReserva.setText(reservation.getIn());
+
+        String tipoDePlaza = reservation.getType();
+        switch (tipoDePlaza) {
+            case "STD":
+                holder.numReserva.setChipIconResource(R.drawable.auto);
+                break;
+            case "MOTO":
+                holder.numReserva.setChipIconResource(R.drawable.motociclea);
+                break;
+            case "ELEC":
+                holder.numReserva.setChipIconResource(R.drawable.electrico);
+                break;
+            case "DISC":
+                holder.numReserva.setChipIconResource(R.drawable.discapacitado);
+                break;
+            default:
+                holder.numReserva.setChipIconResource(R.drawable.parking);
+                break;
+        }
+        holder.numReserva.setText(tipoDePlaza);
+
+        holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 BottomSheetDialogFragment bottomSheet = new ReservaBottomSheet();
@@ -61,6 +86,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
 
     @Override
     public int getItemCount() {
-        return dataSet.size();
+        return dataSet != null ? dataSet.size() : 0;
     }
+
 }

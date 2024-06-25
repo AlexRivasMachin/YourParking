@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,23 +22,33 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.lksnext.arivas.R;
 import com.lksnext.arivas.domain.CardAdapter;
+import com.lksnext.arivas.domain.PlazaAdapter;
+import com.lksnext.arivas.domain.Reservation;
 import com.lksnext.arivas.view.activity.SettingsActivity;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class MainFragment extends Fragment {
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1001;
-
     private NavController navController;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private String locationName = "Zuatzu Kalea, 3, 20018 Donostia, Gipuzkoa";
     private Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + Uri.encode(locationName));
+    private List<Reservation> userReservations;
+    private FirebaseFirestore firestore;
 
 
 
@@ -84,19 +95,11 @@ public class MainFragment extends Fragment {
             }
         });
 
-        recyclerView = rootView.findViewById(R.id.recyclerViewCards);
-        recyclerView.setHasFixedSize(true);
-        layoutManager = new GridLayoutManager(getContext(), 1, GridLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(layoutManager);
+        String userUUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        List<Integer> dataSet = new ArrayList<>();
-        for (int i = 1; i <= 10; i++) {
-            dataSet.add(i);
-        }
+        firestore = FirebaseFirestore.getInstance();
 
-        // Adapter setup
-        adapter = new CardAdapter(getParentFragmentManager(), dataSet);
-    recyclerView.setAdapter(adapter);
+        updateRecycler(rootView, userUUID);
 
         return rootView;
     }
@@ -106,6 +109,41 @@ public class MainFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
     }
+
+    private void updateRecycler(View rootView, String userUUID) {
+        recyclerView = rootView.findViewById(R.id.recyclerViewCards);
+        recyclerView.setHasFixedSize(true);
+
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 1, GridLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+
+        userReservations = new ArrayList<Reservation>();
+        adapter = new CardAdapter(requireFragmentManager(), userReservations);
+        recyclerView.setAdapter(adapter);
+
+        firestore.collection("reservations")
+                .whereEqualTo("uid", userUUID)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                            Reservation reservation = documentSnapshot.toObject(Reservation.class);
+                            userReservations.add(reservation);
+                        }
+                        Collections.sort(userReservations, new Comparator<Reservation>() {
+                            @Override
+                            public int compare(Reservation r1, Reservation r2) {
+                                return r1.getDate().compareTo(r2.getDate());
+                            }
+                        });
+
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+
+
+    }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
