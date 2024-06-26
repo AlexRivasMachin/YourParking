@@ -211,7 +211,7 @@ public class MainFragment extends Fragment {
 
     private boolean isNotPastReservation(String dateString) {
         long reservationTimeMillis = stringToMilis(dateString);
-        long fixedHourMillis = getYesterdayAtFixedHourMillis(); // Obtener milisegundos con hora 20:00 de ayer
+        long fixedHourMillis = getYesterdayAtFixedHourMillis();
 
         return reservationTimeMillis > fixedHourMillis;
     }

@@ -131,15 +131,14 @@
 
             <Button
                 android:id="@+id/eliminar_buttom"
-                style="@style/Widget.Material3.Button.TextButton"
+                style="@style/Widget.Material3.Button.OutlinedButton.Icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:drawableTint="#D1993931"
                 android:text="eliminar"
                 android:textColor="#D70202"
-                app:icon="@drawable/delete"
-                card_view:iconTint="#C10000" />
+                app:icon="@drawable/delete_red"
+                card_view:iconTint="#D70202" />
 
         </LinearLayout>
 

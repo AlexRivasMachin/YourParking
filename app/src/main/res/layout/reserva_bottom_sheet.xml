@@ -2,23 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="30dp">
 
     <com.google.android.material.bottomsheet.BottomSheetDragHandleView
         android:id="@+id/drag_handle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Detalles de la reserva"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:paddingBottom="8dp" />
-
+        />
 
     <ImageView
         android:layout_width="match_parent"
@@ -27,64 +20,89 @@
         android:scaleType="centerCrop"
         android:adjustViewBounds="true"
         android:paddingHorizontal="75dp"
+        android:layout_marginBottom="25dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Detalles de su reserva"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="start"
+        android:paddingBottom="2dp" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        app:color="@color/blue_main"
+        app:dividerColor="@color/blue_main" />
+
+
+    <TextView
+        android:id="@+id/reserva_plaza"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Número de la plaza: 1"
+        android:textSize="16sp"
+        android:padding="0dp"
         android:layout_marginBottom="15dp"
         />
 
     <TextView
+        android:id="@+id/reserva_tipo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="STD_01"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:paddingBottom="8dp"
-        android:paddingTop="8dp"
-        android:background="@color/blue_main"
-        android:textColor="@color/white"
-        android:layout_marginBottom="10dp"
-
+        android:text="Tipo de plaza: Moto"
+        android:textSize="16sp"
+        android:padding="0dp"
+        android:layout_marginBottom="15dp"
         />
 
     <TextView
+        android:id="@+id/reserva_fecha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Fecha: 12/12/2021"
         android:textSize="16sp"
-        android:padding="8dp"
-        android:layout_marginBottom="10dp"
+        android:padding="0dp"
+        android:layout_marginBottom="15dp"
         />
 
     <TextView
+        android:id="@+id/reserva_in"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hora: 12:00"
+        android:text="Hora de entrada: 12:00"
         android:textSize="16sp"
-        android:padding="8dp"
-        android:layout_marginBottom="10dp"
+        android:padding="0dp"
+        android:layout_marginBottom="15dp"
         />
 
     <TextView
+        android:id="@+id/reserva_out"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Plaza: 1"
+        android:text="Hora de salida: 14:00"
         android:textSize="16sp"
-        android:padding="8dp"
+        android:padding="0dp"
         android:layout_marginBottom="20dp"
         />
 
 
-    <TextView
-        android:id="@+id/cancelar_reserva"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/eliminar_reserva"
+        style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:text="Cancelar reserva"
-        android:textAlignment="center"
-        android:textColor="@color/red_main"
-        android:textSize="18sp"
-        android:layout_marginBottom="10dp"
-        />
+        android:layout_gravity="end"
+        android:text="eliminar"
+        android:textColor="#D70202"
+        app:icon="@drawable/delete_red"
+        app:iconTint="#D70202"
+        app:strokeColor="#D70202"
+        card_view:iconTint="#D70202" />
+    />
 
 </LinearLayout>

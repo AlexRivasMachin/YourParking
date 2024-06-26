@@ -78,7 +78,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BottomSheetDialogFragment bottomSheet = new ReservaBottomSheet();
+                BottomSheetDialogFragment bottomSheet = new ReservaBottomSheet(reservation.getSlotId(), reservation.getType(), reservation.getDate(), reservation.getIn(), reservation.getOut());
                 bottomSheet.show(fragmentManager, bottomSheet.getTag());
             }
         });
