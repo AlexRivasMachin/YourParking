@@ -16,6 +16,8 @@ import androidx.navigation.Navigation;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.lksnext.arivas.R;
@@ -66,7 +68,7 @@ public class ReservaBottomSheet extends BottomSheetDialogFragment {
         horaSalidaText.setText("Hora de salida:   " +horaSalida);
 
         rootView.findViewById(R.id.eliminar_reserva).setOnClickListener(v -> {
-            createDeleteDialog(plaza, tipoPlaza, fecha, horaEntrada);
+            createDeleteDialog(FirebaseAuth.getInstance().getCurrentUser().getUid().toString());
         });
 
         return rootView;
@@ -75,9 +77,7 @@ public class ReservaBottomSheet extends BottomSheetDialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // Aquí puedes inicializar tus variables, si es necesario
     }
-
     public String getTipoPlaza(String tipoPlaza){
         if (tipoPlaza.equals("STD")) {
             return "Plaza estándar";
@@ -92,14 +92,14 @@ public class ReservaBottomSheet extends BottomSheetDialogFragment {
         }
     }
 
-    public void createDeleteDialog(String uid, String slotType, String date, String startTime) {
+    public void createDeleteDialog(String uid) {
         new MaterialAlertDialogBuilder(requireContext())
                 .setIcon(R.drawable.delete_forever)
                 .setTitle("Confirmar eliminación")
                 .setMessage("¿Estás seguro de que quieres eliminar la reserva?")
                 .setNegativeButton("Cancelar", null)
                 .setPositiveButton("Confirmar", (dialog, which) -> {
-                    deleteReservation(uid, slotType, date, startTime);
+                    deleteReservation(uid, tipoPlaza, fecha, horaEntrada);
                 })
                 .show();
     }
