@@ -1,15 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'androidx.navigation.safeargs'
 apply plugin: 'com.google.gms.google-services'
-apply plugin: 'org.sonarqube'
 
-sonarqube {
-  properties {
-    property "sonar.projectKey", "AlexRivasMachin_Arivas-Parking"
-    property "sonar.organization", "alexrivasmachin"
-    property "sonar.host.url", "https://sonarcloud.io"
-  }
-}
 
 android {
     compileSdk 34
@@ -65,8 +57,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:23.0.0'
     implementation 'com.google.firebase:firebase-firestore:25.0.0'
     implementation 'com.google.firebase:firebase-analytics'
-
-
 
     testImplementation 'junit:junit:4.+'
     testImplementation 'androidx.arch.core:core-testing:2.2.0'
