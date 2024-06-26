@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +38,8 @@ public class ReservaBottomSheet extends BottomSheetDialogFragment {
     TextView fechaText;
     TextView horaEntradaText;
     TextView horaSalidaText;
+    ImageView tipoPlazaImage;
+    ImageView tipiPLazaIcon;
 
     public ReservaBottomSheet() {
         // Constructor vacío
@@ -61,6 +64,11 @@ public class ReservaBottomSheet extends BottomSheetDialogFragment {
         fechaText = rootView.findViewById(R.id.reserva_fecha);
         horaEntradaText = rootView.findViewById(R.id.reserva_in);
         horaSalidaText = rootView.findViewById(R.id.reserva_out);
+        tipoPlazaImage = rootView.findViewById(R.id.Bottom_sheet_type);
+        tipiPLazaIcon = rootView.findViewById(R.id.reserva_tipo_icon);
+
+        setImage(tipoPlazaImage, tipoPlaza);
+        setIcon(tipiPLazaIcon, tipoPlaza);
 
         plazaText.setText("Número de plaza:   " + plaza);
         tipoPlazaText.setText("Tipo:   " + getTipoPlaza(tipoPlaza));
@@ -73,6 +81,34 @@ public class ReservaBottomSheet extends BottomSheetDialogFragment {
         });
 
         return rootView;
+    }
+
+    private void setIcon(ImageView tipiPLazaIcon, String tipoPlaza) {
+        if (tipoPlaza.equals("STD")) {
+            tipiPLazaIcon.setImageResource(R.drawable.auto);
+        } else if (tipoPlaza.equals("MOTO")) {
+            tipiPLazaIcon.setImageResource(R.drawable.motociclea);
+        } else if (tipoPlaza.equals("ELEC")) {
+            tipiPLazaIcon.setImageResource(R.drawable.electrico);
+        } else if (tipoPlaza.equals("DISC")) {
+            tipiPLazaIcon.setImageResource(R.drawable.discapacitado);
+        } else {
+            tipiPLazaIcon.setImageResource(R.drawable.auto);
+        }
+    }
+
+    private void setImage(ImageView tipoPlazaImage, String tipoPlaza) {
+        if (tipoPlaza.equals("STD")) {
+            tipoPlazaImage.setImageResource(R.drawable.coche_normal);
+        } else if (tipoPlaza.equals("MOTO")) {
+            tipoPlazaImage.setImageResource(R.drawable.moto);
+        } else if (tipoPlaza.equals("ELEC")) {
+            tipoPlazaImage.setImageResource(R.drawable.coche_electrico);
+        } else if (tipoPlaza.equals("DISC")) {
+            tipoPlazaImage.setImageResource(R.drawable.coche_minusvalido);
+        } else {
+            tipoPlazaImage.setImageResource(R.drawable.coche_normal);
+        }
     }
 
     @Override

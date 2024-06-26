@@ -99,13 +99,13 @@ public class PastReservationAdapter extends RecyclerView.Adapter<PastReservation
                     imageView.setImageResource(R.drawable.motociclea);
                     break;
                 case "DISC":
-                    imageView.setImageResource(R.drawable.motociclea);
+                    imageView.setImageResource(R.drawable.discapacitado);
                     break;
                 case "ELEC":
-                    imageView.setImageResource(R.drawable.motociclea);
+                    imageView.setImageResource(R.drawable.electrico);
                     break;
                 default:
-                    imageView.setImageResource(R.drawable.motociclea);
+                    imageView.setImageResource(R.drawable.auto);
                     break;
             }
         }

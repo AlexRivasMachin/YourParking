@@ -14,6 +14,7 @@
         />
 
     <ImageView
+        android:id="@+id/Bottom_sheet_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/moto"
@@ -39,57 +40,128 @@
         app:color="@color/blue_main"
         app:dividerColor="@color/blue_main" />
 
-
-    <TextView
-        android:id="@+id/reserva_plaza"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Número de la plaza: 1"
-        android:textSize="16sp"
-        android:padding="0dp"
+        android:orientation="horizontal"
+        android:layout_gravity="start"
         android:layout_marginBottom="15dp"
-        />
-
-    <TextView
-        android:id="@+id/reserva_tipo"
-        android:layout_width="match_parent"
+        >
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="20dp"
+            android:src="@drawable/parking"
+            android:layout_marginEnd="8dp"
+            android:layout_gravity="center_vertical"
+            />
+        <TextView
+            android:id="@+id/reserva_plaza"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Número de la plaza: 1"
+            android:textSize="16sp"
+            android:padding="0dp"
+            android:layout_marginBottom="0dp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tipo de plaza: Moto"
-        android:textSize="16sp"
-        android:padding="0dp"
+        android:orientation="horizontal"
+        android:layout_gravity="start"
         android:layout_marginBottom="15dp"
-        />
-
-    <TextView
-        android:id="@+id/reserva_fecha"
-        android:layout_width="match_parent"
+        >
+        <ImageView
+            android:id="@+id/reserva_tipo_icon"
+            android:layout_width="24dp"
+            android:layout_height="20dp"
+            android:src="@drawable/auto"
+            android:layout_marginEnd="8dp"
+            android:layout_gravity="center_vertical"
+            />
+        <TextView
+            android:id="@+id/reserva_tipo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tipo de plaza: Moto"
+            android:textSize="16sp"
+            android:padding="0dp"
+            android:layout_marginBottom="0dp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fecha: 12/12/2021"
-        android:textSize="16sp"
-        android:padding="0dp"
+        android:orientation="horizontal"
+        android:layout_gravity="start"
         android:layout_marginBottom="15dp"
-        />
+        >
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="20dp"
+            android:src="@drawable/calendar_icon"
+            android:layout_marginEnd="8dp"
+            android:layout_gravity="center_vertical"
+            />
 
-    <TextView
-        android:id="@+id/reserva_in"
-        android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/reserva_fecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fecha: 12/12/2021"
+            android:textSize="16sp"
+            android:padding="0dp"
+            android:layout_marginBottom="0dp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hora de entrada: 12:00"
-        android:textSize="16sp"
-        android:padding="0dp"
+        android:orientation="horizontal"
+        android:layout_gravity="start"
         android:layout_marginBottom="15dp"
-        />
+        >
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="20dp"
+            android:src="@drawable/clock_icon"
+            android:layout_marginEnd="8dp"
+            android:layout_gravity="center_vertical"
+            />
+        <TextView
+            android:id="@+id/reserva_in"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hora de entrada: 12:00"
+            android:textSize="16sp"
+            android:padding="0dp"
+            android:layout_marginBottom="0dp"
+            />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/reserva_out"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hora de salida: 14:00"
-        android:textSize="16sp"
-        android:padding="0dp"
-        android:layout_marginBottom="20dp"
-        />
+        android:orientation="horizontal"
+        android:layout_gravity="start"
+        >
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="20dp"
+            android:src="@drawable/clock_icon"
+            android:layout_marginEnd="8dp"
+            android:layout_gravity="center_vertical"/>
 
+        <TextView
+            android:id="@+id/reserva_out"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hora de salida: 14:00"
+            android:textSize="16sp"
+            android:padding="0dp"
+            android:layout_marginBottom="0dp"
+            />
+    </LinearLayout>
 
     <Button
         android:id="@+id/eliminar_reserva"
