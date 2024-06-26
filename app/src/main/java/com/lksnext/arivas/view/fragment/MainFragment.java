@@ -5,10 +5,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,15 +21,17 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.TaskCompletionSource;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.button.MaterialButtonToggleGroup;
+import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.lksnext.arivas.R;
-import com.lksnext.arivas.domain.CardAdapter;
-import com.lksnext.arivas.domain.PlazaAdapter;
+import com.lksnext.arivas.adapters.CardAdapter;
 import com.lksnext.arivas.domain.Reservation;
 import com.lksnext.arivas.view.activity.SettingsActivity;
 
@@ -37,11 +39,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class MainFragment extends Fragment {
 
@@ -67,6 +69,8 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        String userUUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        firestore = FirebaseFirestore.getInstance();
 
         MaterialButton settingButton = rootView.findViewById(R.id.btnGoToSettings);
         settingButton.setOnClickListener(new View.OnClickListener() {
@@ -100,9 +104,25 @@ public class MainFragment extends Fragment {
             }
         });
 
-        String userUUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        CircularProgressIndicator progressIndicatorSTD = rootView.findViewById(R.id.progress_STD);
+        CircularProgressIndicator progressIndicatorMOTO = rootView.findViewById(R.id.progress_MOTO);
+        CircularProgressIndicator progressIndicatorELEC = rootView.findViewById(R.id.progress_ELEC);
+        CircularProgressIndicator progressIndicatorDISC = rootView.findViewById(R.id.progress_DISC);
 
-        firestore = FirebaseFirestore.getInstance();
+        TextView tvFreeSTD = rootView.findViewById(R.id.free_places_auto_tv);
+        TextView tvFreeMOTO = rootView.findViewById(R.id.free_places_moto_tv);
+        TextView tvFreeELEC = rootView.findViewById(R.id.free_places_elect_tv);
+        TextView tvFreeDISC = rootView.findViewById(R.id.free_places_disc_tv);
+
+        progressIndicatorSTD.setProgress(getProgress(getNumOfTypeVehicles("STD"), 50) ,true);
+        progressIndicatorMOTO.setProgress(getProgress(getNumOfTypeVehicles("MOTO"), 30) ,true);
+        progressIndicatorELEC.setProgress(getProgress(getNumOfTypeVehicles("ELEC"), 10) ,true);
+        progressIndicatorDISC.setProgress(getProgress(getNumOfTypeVehicles("DISC"), 10) ,true);
+
+        tvFreeSTD.setText(getFreeSlots(getNumOfTypeVehicles("STD"), 50)+ "/50");
+        tvFreeMOTO.setText(getFreeSlots(getNumOfTypeVehicles("MOTO"), 30)+ "/30");
+        tvFreeELEC.setText(getFreeSlots(getNumOfTypeVehicles("ELEC"), 10)+ "/10");
+        tvFreeDISC.setText(getFreeSlots(getNumOfTypeVehicles("DISC"), 10)+ "/10");
 
         updateRecycler(rootView, userUUID);
 
@@ -215,5 +235,52 @@ public class MainFragment extends Fragment {
 
         return reservationTimeMillis > fixedHourMillis;
     }
+
+    public int getFreeSlots(int used, int total){
+        return total-used;
+    }
+    public int getProgress(int used, int total) {
+        if (total == 0) {
+            return 0;
+        }
+        double progress = (1-(double) used / total) * 100;
+        return (int) progress;
+    }
+        public int getNumOfTypeVehicles(String vehicleType) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+            String currentDateStr = dateFormat.format(new Date());
+
+            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
+            String currentTimeStr = timeFormat.format(new Date());
+
+            TaskCompletionSource<Integer> taskCompletionSource = new TaskCompletionSource<>();
+
+            firestore.collection("reservations")
+                    .whereEqualTo("type", vehicleType)
+                    .whereEqualTo("date", currentDateStr)
+                    .whereEqualTo("in", currentTimeStr)
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                int count = 0;
+                                for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                                    count++;
+                                }
+                                taskCompletionSource.setResult(count);
+                            } else {
+                                taskCompletionSource.setResult(0);
+                            }
+                        }
+                    });
+
+            try {
+                return taskCompletionSource.getTask().getResult();
+            } catch (Exception e) {
+                e.printStackTrace();
+                return 0;
+            }
+        }
 
 }

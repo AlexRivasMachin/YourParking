@@ -1,4 +1,4 @@
-package com.lksnext.arivas.domain;
+package com.lksnext.arivas.utils;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -109,9 +110,9 @@ public class ReservaBottomSheet extends BottomSheetDialogFragment {
 
         db.collection("reservations")
                 .whereEqualTo("uid", uid)
-                .whereEqualTo("slotType", slotType)
+                .whereEqualTo("type", slotType)
                 .whereEqualTo("date", date)
-                .whereEqualTo("startTime", startTime)
+                .whereEqualTo("in", startTime)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
@@ -119,9 +120,7 @@ public class ReservaBottomSheet extends BottomSheetDialogFragment {
                                 .document(document.getId())
                                 .delete()
                                 .addOnSuccessListener(aVoid -> {
-                                    Toast.makeText(requireContext(), "Reserva eliminada correctamente", Toast.LENGTH_SHORT).show();
-                                    NavController navController = Navigation.findNavController(Objects.requireNonNull(((Activity) requireContext()).getCurrentFocus()));
-                                    navController.navigate(R.id.mainFragment);
+                                    this.dismiss();
                                 })
                                 .addOnFailureListener(e -> {
                                     Toast.makeText(requireContext(), "Error al eliminar la reserva: " + e.getMessage(), Toast.LENGTH_SHORT).show();

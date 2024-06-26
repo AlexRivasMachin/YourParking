@@ -1,6 +1,5 @@
 package com.lksnext.arivas.view.fragment.ajustes;
 
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -21,10 +20,7 @@ import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.lksnext.arivas.R;
-import com.lksnext.arivas.view.activity.ProviderType;
 import com.lksnext.arivas.viewmodel.ajustes.AjustesElminarCuentaViewModel;
-
-import java.util.Objects;
 
 public class AjustesElminarCuentaFragment extends Fragment {
 

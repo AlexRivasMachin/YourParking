@@ -1,15 +1,10 @@
 package com.lksnext.arivas.view.fragment.reservas;
 
-import static androidx.databinding.adapters.CompoundButtonBindingAdapter.setChecked;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.TimePickerDialog;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.TimeZone;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
@@ -18,9 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -33,23 +26,18 @@ import android.widget.Toast;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.datepicker.CalendarConstraints;
-import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
-import com.google.android.material.chip.Chip;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.ktx.Firebase;
 import com.lksnext.arivas.R;
-import com.lksnext.arivas.domain.CardAdapter;
-import com.lksnext.arivas.domain.FutureDateValidator;
-import com.lksnext.arivas.domain.PlazaAdapter;
+import com.lksnext.arivas.utils.FutureDateValidator;
+import com.lksnext.arivas.adapters.PlazaAdapter;
 import com.lksnext.arivas.domain.Reservation;
-import com.lksnext.arivas.view.fragment.MainFragment;
 import com.lksnext.arivas.viewmodel.reservas.ReservasViewModel;
 
 import java.util.ArrayList;
@@ -136,9 +124,7 @@ public class RealizarReservaFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         navController = Navigation.findNavController(view);
-
     }
 
     public void createDatePicker(EditText etDate) {

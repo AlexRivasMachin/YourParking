@@ -24,6 +24,9 @@
         <action
             android:id="@+id/action_reservasPasadasFragment_to_realizarReservaFragment"
             app:destination="@id/realizarReservaFragment" />
+        <action
+            android:id="@+id/action_reservasPasadasFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
 
     <fragment
@@ -33,6 +36,12 @@
         tools:layout="@layout/fragment_realizar_reserva">
             <action android:id="@+id/action_realizarReservaFragment_to_confirmarReservaFragment"
                 app:destination="@id/confirmarReservaFragment" />
+        <action
+            android:id="@+id/action_realizarReservaFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_realizarReservaFragment_to_reservasPasadasFragment"
+            app:destination="@id/reservasPasadasFragment" />
     </fragment>
 
     <fragment
@@ -40,6 +49,9 @@
         android:name="com.lksnext.arivas.view.fragment.reservas.ConfirmarReservaFragment"
         android:label="@string/material_motion_easing_accelerated"
         tools:layout="@layout/fragment_confirmar_reserva">
+        <action
+            android:id="@+id/action_confirmarReservaFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
 
 

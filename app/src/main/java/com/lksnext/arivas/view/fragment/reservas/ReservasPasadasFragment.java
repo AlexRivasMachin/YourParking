@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,8 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.lksnext.arivas.R;
-import com.lksnext.arivas.domain.CardAdapter;
-import com.lksnext.arivas.domain.PastReservationAdapter;
+import com.lksnext.arivas.adapters.PastReservationAdapter;
 import com.lksnext.arivas.domain.Reservation;
 import com.lksnext.arivas.viewmodel.reservas.ReservasPasadasViewModel;
 
@@ -32,7 +32,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -184,4 +183,9 @@ public class ReservasPasadasFragment extends Fragment {
         mViewModel = new ViewModelProvider(this).get(ReservasPasadasViewModel.class);
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        navController = Navigation.findNavController(view);
+    }
 }

@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.lksnext.arivas.R;
 import com.lksnext.arivas.databinding.ActivityRegisterBinding;
+import com.lksnext.arivas.utils.ProviderType;
 import com.lksnext.arivas.viewmodel.login.RegisterViewModel;
 
 public class    RegisterActivity extends AppCompatActivity {

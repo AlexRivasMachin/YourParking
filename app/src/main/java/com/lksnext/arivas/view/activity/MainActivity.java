@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -42,22 +41,30 @@ public class MainActivity extends AppCompatActivity {
         navController = navHostFragment.getNavController();
 
         bottomNavigationView = binding.bottomNavigationView;
-        NavigationUI.setupWithNavController(bottomNavigationView, navController);
+        appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.mainFragment, R.id.realizarReservaFragment, R.id.reservasPasadasFragment)
+                .build();
 
+        NavigationUI.setupWithNavController(bottomNavigationView, navController);
         bottomNavigationView.setOnItemSelectedListener(item -> {
-            int itemId = item.getItemId();
-            if (itemId == R.id.inicio) {
-                navController.navigate(R.id.mainFragment);
-                return true;
-            } else if (itemId == R.id.reservasPasadas) {
-                navController.navigate(R.id.reservasPasadasFragment);
-                return true;
+            switch (item.getItemId()) {
+                case R.id.inicio:
+                    navController.navigate(R.id.mainFragment);
+                    return true;
+                case R.id.reservasPasadas:
+                    navController.navigate(R.id.reservasPasadasFragment);
+                    return true;
+                case R.id.realizarReserva:
+                    navController.navigate(R.id.realizarReservaFragment);
+                    return true;
+                default:
+                    return false;
             }
-            return false;
         });
 
         checkAndPopulateParkingSlots();
     }
+
 
     private void checkAndPopulateParkingSlots() {
         db.collection("parking_slots").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -65,10 +72,8 @@ public class MainActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     if (task.getResult().isEmpty()) {
-                        // No hay documentos en la colección, poblamos las plazas de estacionamiento
                         populateParkingSlots();
                     } else {
-                        // Ya existen documentos en la colección
                         Log.d("MainActivity", "Las plazas de estacionamiento ya están generadas.");
                     }
                 } else {

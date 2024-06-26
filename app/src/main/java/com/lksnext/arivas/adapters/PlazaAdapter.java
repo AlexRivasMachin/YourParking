@@ -1,4 +1,4 @@
-package com.lksnext.arivas.domain;
+package com.lksnext.arivas.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;

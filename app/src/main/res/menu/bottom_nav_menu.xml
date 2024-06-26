@@ -7,6 +7,11 @@
         android:icon="@drawable/ic_inicio"/>
 
     <item
+        android:id="@+id/realizarReserva"
+        android:title="Reservar"
+        android:icon="@drawable/parking"/>
+
+    <item
         android:id="@+id/reservasPasadas"
         android:title="@string/title_Reservas_pasadas"
         android:icon="@drawable/ic_reservas"/>

@@ -1,4 +1,4 @@
-package com.lksnext.arivas.domain;
+package com.lksnext.arivas.data;
 
 public interface Callback {
     void onSuccess();

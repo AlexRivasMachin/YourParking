@@ -1,20 +1,19 @@
-package com.lksnext.arivas.domain;
+package com.lksnext.arivas.adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.chip.Chip;
 import com.lksnext.arivas.R;
+import com.lksnext.arivas.utils.ReservaBottomSheet;
+import com.lksnext.arivas.domain.Reservation;
 
 import java.util.List;
 

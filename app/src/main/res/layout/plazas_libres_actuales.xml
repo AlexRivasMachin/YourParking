@@ -79,7 +79,7 @@
                             android:textSize="12dp" />
 
                         <TextView
-                            android:id="@+id/free_places_auto_tv"
+                            android:id="@+id/free_places_auto_tvv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity=""
@@ -147,7 +147,7 @@
                             android:textSize="12dp" />
 
                         <TextView
-                            android:id="@+id/free_places_moto_tv"
+                            android:id="@+id/free_places_moto_tvv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity=""
@@ -215,7 +215,7 @@
                             android:textSize="12dp" />
 
                         <TextView
-                            android:id="@+id/free_places_elect_tv"
+                            android:id="@+id/free_places_elect_tvv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity=""
@@ -283,7 +283,7 @@
                             android:textSize="12dp" />
 
                         <TextView
-                            android:id="@+id/free_places_disc_tv"
+                            android:id="@+id/free_places_disc_tvv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity=""

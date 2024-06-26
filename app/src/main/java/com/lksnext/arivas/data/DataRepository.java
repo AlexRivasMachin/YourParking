@@ -1,7 +1,5 @@
 package com.lksnext.arivas.data;
 
-import com.lksnext.arivas.domain.Callback;
-
 public class DataRepository {
 
     private static DataRepository instance;

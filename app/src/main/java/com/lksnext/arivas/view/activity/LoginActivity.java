@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.lksnext.arivas.R;
 import com.lksnext.arivas.databinding.ActivityLoginBinding;
+import com.lksnext.arivas.utils.ProviderType;
 import com.lksnext.arivas.viewmodel.login.LoginViewModel;
 
 public class LoginActivity extends AppCompatActivity {

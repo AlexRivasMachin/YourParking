@@ -1,4 +1,4 @@
-package com.lksnext.arivas.view.activity;
+package com.lksnext.arivas.utils;
 
 public enum ProviderType {
     BASIC,

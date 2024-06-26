@@ -1,4 +1,4 @@
-package com.lksnext.arivas.domain;
+package com.lksnext.arivas.utils;
 
 import android.annotation.SuppressLint;
 import android.os.Parcel;
