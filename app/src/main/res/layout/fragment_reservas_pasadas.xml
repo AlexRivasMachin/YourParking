@@ -10,15 +10,15 @@
 
     <TextView
         android:id="@+id/Titulo"
-        android:layout_width="203dp"
-        android:layout_height="37dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="28dp"
-        android:text="@string/title_Reservas_pasadas"
+        android:gravity="start"
+        android:text="Historial de reservas"
         android:textAlignment="textStart"
         android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.142"
+        android:textStyle="normal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         tools:ignore="MissingConstraints" />
@@ -74,7 +74,21 @@
         android:id="@+id/recyclerViewPastReservations"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activas_tv"
+        android:foregroundGravity="center"
+        />
+
+    <TextView
+        android:id="@+id/activas_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/title_Reservas_pasadas"
+        android:textSize="18dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toggleButton" />
 
@@ -117,7 +131,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
+        android:layout_margin="4dp"
         android:backgroundTint="@color/blue_main"
         android:text="Realizar reserva"
         app:icon="@drawable/ic_newres_foreground"
