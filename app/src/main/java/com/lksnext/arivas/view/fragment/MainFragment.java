@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,6 +57,7 @@ public class MainFragment extends Fragment {
     private Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + Uri.encode(locationName));
     private List<Reservation> userReservations;
     private FirebaseFirestore firestore;
+    private Boolean areThereReservations;
 
 
 
@@ -66,41 +68,31 @@ public class MainFragment extends Fragment {
         return new MainFragment();
     }
 
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         String userUUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         firestore = FirebaseFirestore.getInstance();
 
         MaterialButton settingButton = rootView.findViewById(R.id.btnGoToSettings);
-        settingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SettingsActivity.class);
-                startActivity(intent);
-            }
+        settingButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), SettingsActivity.class);
+            startActivity(intent);
         });
 
         MaterialButton realizarReservaButton = rootView.findViewById(R.id.btnRealizarReserva);
-        realizarReservaButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navController.navigate(R.id.realizarReservaFragment);
-            }
+        realizarReservaButton.setOnClickListener(v -> {
+            navController.navigate(R.id.realizarReservaFragment);
         });
 
         MaterialButton comoLlegarButton = rootView.findViewById(R.id.comollegar);
-        comoLlegarButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(requireActivity(),
-                            new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                            LOCATION_PERMISSION_REQUEST_CODE);
-                } else {
-                    obtenerUbicacionYAbrirGoogleMaps();
-                }
+        comoLlegarButton.setOnClickListener(v -> {
+            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(requireActivity(),
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        LOCATION_PERMISSION_REQUEST_CODE);
+            } else {
+                obtenerUbicacionYAbrirGoogleMaps();
             }
         });
 
@@ -124,25 +116,37 @@ public class MainFragment extends Fragment {
         tvFreeELEC.setText(getFreeSlots(getNumOfTypeVehicles("ELEC"), 10)+ "/10");
         tvFreeDISC.setText(getFreeSlots(getNumOfTypeVehicles("DISC"), 10)+ "/10");
 
-        updateRecycler(rootView, userUUID);
+        loadReservationsAndUpdateUI(rootView, userUUID);
 
         return rootView;
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        navController = Navigation.findNavController(view);
+    private void loadReservationsAndUpdateUI(View rootView, String userUUID) {
+        firestore.collection("reservations")
+                .whereEqualTo("uid", userUUID)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        boolean hasReservations = !task.getResult().isEmpty();
+                        if (hasReservations) {
+                            rootView.findViewById(R.id.no_reservations).setVisibility(View.GONE);
+                            initializeRecyclerView(rootView, userUUID);
+                        } else {
+                            rootView.findViewById(R.id.no_reservations).setVisibility(View.VISIBLE);
+                        }
+                    } else {
+                        Toast.makeText(requireContext(), "Error al obtener las reservas", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
-    private void updateRecycler(View rootView, String userUUID) {
+    private void initializeRecyclerView(View rootView, String userUUID) {
         recyclerView = rootView.findViewById(R.id.recyclerViewCards);
         recyclerView.setHasFixedSize(true);
-
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 1, GridLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
-        userReservations = new ArrayList<Reservation>();
+        userReservations = new ArrayList<>();
         adapter = new CardAdapter(requireFragmentManager(), userReservations);
         recyclerView.setAdapter(adapter);
 
@@ -157,18 +161,52 @@ public class MainFragment extends Fragment {
                                 userReservations.add(reservation);
                             }
                         }
-                        Collections.sort(userReservations, new Comparator<Reservation>() {
-                            @Override
-                            public int compare(Reservation r1, Reservation r2) {
-                                return r1.getDate().compareTo(r2.getDate());
-                            }
-                        });
-
+                        Collections.sort(userReservations, Comparator.comparing(Reservation::getDate));
                         adapter.notifyDataSetChanged();
+                    } else {
+                        Toast.makeText(requireContext(), "Error al obtener las reservas", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        navController = Navigation.findNavController(view);
+    }
 
+    private void updateRecycler(View rootView, String userUUID) {
+        System.out.println(areThereReservations);
+        if (areThereReservations) {
+            rootView.findViewById(R.id.no_reservations).setVisibility(View.GONE);
+            recyclerView = rootView.findViewById(R.id.recyclerViewCards);
+            recyclerView.setHasFixedSize(true);
+
+            GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 1, GridLayoutManager.HORIZONTAL, false);
+            recyclerView.setLayoutManager(layoutManager);
+
+            userReservations = new ArrayList<>();
+            adapter = new CardAdapter(requireFragmentManager(), userReservations);
+            recyclerView.setAdapter(adapter);
+
+            firestore.collection("reservations")
+                    .whereEqualTo("uid", userUUID)
+                    .get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                                Reservation reservation = documentSnapshot.toObject(Reservation.class);
+                                if (isNotPastReservation(reservation.getDate())) {
+                                    userReservations.add(reservation);
+                                }
+                            }
+                            Collections.sort(userReservations, (r1, r2) -> r1.getDate().compareTo(r2.getDate()));
+                            adapter.notifyDataSetChanged();
+                        } else {
+                            Toast.makeText(requireContext(), "Error al obtener las reservas", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
     }
 
 
@@ -282,5 +320,26 @@ public class MainFragment extends Fragment {
                 return 0;
             }
         }
+    public boolean areThereReservations(String userUUID) {
+        TaskCompletionSource<Boolean> taskCompletionSource = new TaskCompletionSource<>();
 
+        firestore.collection("reservations")
+                .whereEqualTo("uid", userUUID)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            taskCompletionSource.setResult(!task.getResult().isEmpty());
+                        }
+                    }
+                });
+
+        try {
+            return taskCompletionSource.getTask().getResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

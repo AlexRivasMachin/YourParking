@@ -47,7 +47,7 @@ public class ReservaBottomSheet extends BottomSheetDialogFragment {
 
     public ReservaBottomSheet(String plaza, String tipoPlaza, String fecha, String horaEntrada, String horaSalida) {
         this.plaza = plaza;
-        this.tipoPlaza = tipoPlaza;
+        this.tipoPlaza = tipoPlaza != null ? tipoPlaza : "STD";
         this.fecha = fecha;
         this.horaEntrada = horaEntrada;
         this.horaSalida = horaSalida;

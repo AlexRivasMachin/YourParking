@@ -1,5 +1,6 @@
 package com.lksnext.arivas.adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,39 +49,75 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
-        Reservation reservation = dataSet.get(position);
+        if (dataSet != null && !dataSet.isEmpty()) {
+            Reservation reservation = dataSet.get(position);
 
-        holder.numReserva.setText(reservation.getSlotId());
-        holder.fechaReserva.setText(reservation.getDate());
-        holder.horaReserva.setText(reservation.getIn());
+            if (reservation != null) {
+                // Check for null before accessing reservation properties
+                if (reservation.getSlotId() != null) {
+                    holder.numReserva.setText(reservation.getSlotId());
+                } else {
+                    holder.numReserva.setText("");
+                }
 
-        String tipoDePlaza = reservation.getType();
-        switch (tipoDePlaza) {
-            case "STD":
-                holder.numReserva.setChipIconResource(R.drawable.auto);
-                break;
-            case "MOTO":
-                holder.numReserva.setChipIconResource(R.drawable.motociclea);
-                break;
-            case "ELEC":
-                holder.numReserva.setChipIconResource(R.drawable.electrico);
-                break;
-            case "DISC":
-                holder.numReserva.setChipIconResource(R.drawable.discapacitado);
-                break;
-            default:
-                holder.numReserva.setChipIconResource(R.drawable.parking);
-                break;
-        }
-        holder.numReserva.setText(tipoDePlaza);
+                if (reservation.getDate() != null) {
+                    holder.fechaReserva.setText(reservation.getDate());
+                } else {
+                    holder.fechaReserva.setText("");
+                }
 
-        holder.card.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BottomSheetDialogFragment bottomSheet = new ReservaBottomSheet(reservation.getSlotId(), reservation.getType(), reservation.getDate(), reservation.getIn(), reservation.getOut());
-                bottomSheet.show(fragmentManager, bottomSheet.getTag());
+                if (reservation.getIn() != null) {
+                    holder.horaReserva.setText(reservation.getIn());
+                } else {
+                    holder.horaReserva.setText("");
+                }
+
+                String tipoDePlaza = reservation.getType();
+                if (tipoDePlaza != null) {
+                    switch (tipoDePlaza) {
+                        case "STD":
+                            holder.numReserva.setChipIconResource(R.drawable.auto);
+                            break;
+                        case "MOTO":
+                            holder.numReserva.setChipIconResource(R.drawable.motociclea);
+                            break;
+                        case "ELEC":
+                            holder.numReserva.setChipIconResource(R.drawable.electrico);
+                            break;
+                        case "DISC":
+                            holder.numReserva.setChipIconResource(R.drawable.discapacitado);
+                            break;
+                        default:
+                            holder.numReserva.setChipIconResource(R.drawable.parking);
+                            break;
+                    }
+                    holder.numReserva.setText(tipoDePlaza);
+                } else {
+                    holder.numReserva.setText("STD");
+                }
+
+                holder.card.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (reservation != null) {
+                            BottomSheetDialogFragment bottomSheet = new ReservaBottomSheet(
+                                    reservation.getSlotId(),
+                                    reservation.getType(),
+                                    reservation.getDate(),
+                                    reservation.getIn(),
+                                    reservation.getOut());
+                            bottomSheet.show(fragmentManager, bottomSheet.getTag());
+                        } else {
+                            Log.e("CardAdapter", "Reservation object is null in onClick");
+                        }
+                    }
+                });
+            } else {
+                Log.e("CardAdapter", "Reservation object is null at position: " + position);
             }
-        });
+        } else {
+            Log.e("CardAdapter", "DataSet is null or empty");
+        }
     }
 
     @Override

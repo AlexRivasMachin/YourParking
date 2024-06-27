@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.material.chip.Chip;
@@ -55,6 +56,7 @@ public class RealizarReservaFragment extends Fragment {
     private FirebaseFirestore firestore;
     private  String selectedChipType;
     private String selectedChip;
+    private ProgressBar reservationProgressBar;
 
 
 
@@ -68,6 +70,8 @@ public class RealizarReservaFragment extends Fragment {
         firestore = FirebaseFirestore.getInstance();
 
         ChipGroup chipGroup = rootView.findViewById(R.id.chipGroup);
+        reservationProgressBar = rootView.findViewById(R.id.reservationProgressIndicator);
+        reservationProgressBar.setVisibility(View.VISIBLE);
 
         chipGroup.setOnCheckedStateChangeListener(new ChipGroup.OnCheckedStateChangeListener() {
             @Override
@@ -95,6 +99,7 @@ public class RealizarReservaFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 createTimePicker(etTimeEntry, null);
+                setProgress(rootView);
             }
         });
         EditText etTimeExit = rootView.findViewById(R.id.et_time_exit);
@@ -102,6 +107,7 @@ public class RealizarReservaFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 createTimePicker(etTimeExit, etTimeEntry);
+                setProgress(rootView);
             }
         });
 
@@ -113,6 +119,7 @@ public class RealizarReservaFragment extends Fragment {
                     createDialog(rootView);
                 } else {
                     Toast.makeText(getContext(), "Por favor, complete todos los campos.", Toast.LENGTH_LONG).show();
+                    setProgress(rootView);
                 }
             }
         });
@@ -126,6 +133,38 @@ public class RealizarReservaFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
     }
+
+    public void setProgress(View rootView) {
+        int progress = 0;
+
+        ChipGroup chipGroup = rootView.findViewById(R.id.chipGroup);
+        EditText etDate = rootView.findViewById(R.id.et_date);
+        EditText etTimeEntry = rootView.findViewById(R.id.et_time_entry);
+        EditText etTimeExit = rootView.findViewById(R.id.et_time_exit);
+        RecyclerView recyclerView = rootView.findViewById(R.id.recyclerViewChips);
+        PlazaAdapter adapter = (PlazaAdapter) recyclerView.getAdapter();
+
+        boolean isAnyRecyclerViewChipSelected = adapter != null && adapter.isItemSelected();
+
+        if (!isAnyRecyclerViewChipSelected) {
+            progress += 25;
+        }
+        if (chipGroup.getCheckedChipId() == View.NO_ID) {
+            progress += 25;
+        }
+        if (etDate.getText().toString().isEmpty()) {
+            progress += 25;
+        }
+        if (etTimeEntry.getText().toString().isEmpty()) {
+            progress += 25;
+        }
+        if (etTimeExit.getText().toString().isEmpty()) {
+            progress += 25;
+        }
+        System.out.println(progress);
+        reservationProgressBar.setProgress(progress);
+    }
+
 
     public void createDatePicker(EditText etDate) {
         long today = MaterialDatePicker.todayInUtcMilliseconds();
@@ -154,6 +193,7 @@ public class RealizarReservaFragment extends Fragment {
 
                 Toast.makeText(getContext(), "Fecha seleccionada: " + selectedDate, Toast.LENGTH_LONG).show();
                 etDate.setText(selectedDate);
+                setProgress(getView());
             }
         });
 

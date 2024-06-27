@@ -7,6 +7,15 @@
     android:layout_margin="10dp"
     tools:context=".view.fragment.reservas.RealizarReservaFragment">
 
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/reservationProgressIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:progressTint="@color/blue_main"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/TitulRealizarReserva"
         android:layout_width="203dp"
