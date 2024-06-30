@@ -54,7 +54,7 @@ public class MainFragment extends Fragment {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private String locationName = "Zuatzu Kalea, 3, 20018 Donostia, Gipuzkoa";
-    private Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + Uri.encode(locationName));
+    private Uri gmmIntentUri;
     private List<Reservation> userReservations;
     private FirebaseFirestore firestore;
     private Boolean areThereReservations;
@@ -92,7 +92,7 @@ public class MainFragment extends Fragment {
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         LOCATION_PERMISSION_REQUEST_CODE);
             } else {
-                obtenerUbicacionYAbrirGoogleMaps();
+                openGoogleMaps();
             }
         });
 
@@ -215,22 +215,21 @@ public class MainFragment extends Fragment {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                obtenerUbicacionYAbrirGoogleMaps();
+                openGoogleMaps();
+            } else {
+                Toast.makeText(requireContext(), "Permiso de ubicación denegado", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    private void obtenerUbicacionYAbrirGoogleMaps() {
+    private void openGoogleMaps() {
+        gmmIntentUri = Uri.parse("geo:0,0?q=" + Uri.encode(locationName));
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
         try {
-            if (mapIntent.resolveActivity(requireActivity().getPackageManager()) != null) {
-                startActivity(mapIntent);
-            } else {
-                Toast.makeText(requireContext(), "Google Maps no está instalado en el dispositivo", Toast.LENGTH_SHORT).show();
-            }
+            startActivity(mapIntent);
         } catch (Exception e) {
-            Toast.makeText(requireContext(), "Error al abrir Google Maps: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "Error al abrir Google Maps", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
     }

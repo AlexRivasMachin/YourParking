@@ -1,7 +1,10 @@
 package com.lksnext.arivas.view.fragment.reservas;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Objects;
 import java.util.TimeZone;
 
@@ -15,7 +18,12 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.work.Data;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 
+import android.animation.ObjectAnimator;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +44,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.lksnext.arivas.R;
+import com.lksnext.arivas.domain.ReservationWorker;
 import com.lksnext.arivas.utils.FutureDateValidator;
 import com.lksnext.arivas.adapters.PlazaAdapter;
 import com.lksnext.arivas.domain.Reservation;
@@ -44,6 +53,7 @@ import com.lksnext.arivas.viewmodel.reservas.ReservasViewModel;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class RealizarReservaFragment extends Fragment {
 
@@ -126,6 +136,18 @@ public class RealizarReservaFragment extends Fragment {
 
         updateRecyclerView(rootView, "STD");
 
+        recyclerView.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
+            @Override
+            public void onChildViewAttachedToWindow(@NonNull View view) {
+                setProgress(rootView);
+            }
+
+            @Override
+            public void onChildViewDetachedFromWindow(@NonNull View view) {
+                setProgress(rootView);
+            }
+        });
+
         return rootView;
     }
     @Override
@@ -137,7 +159,6 @@ public class RealizarReservaFragment extends Fragment {
     public void setProgress(View rootView) {
         int progress = 0;
 
-        ChipGroup chipGroup = rootView.findViewById(R.id.chipGroup);
         EditText etDate = rootView.findViewById(R.id.et_date);
         EditText etTimeEntry = rootView.findViewById(R.id.et_time_entry);
         EditText etTimeExit = rootView.findViewById(R.id.et_time_exit);
@@ -146,23 +167,22 @@ public class RealizarReservaFragment extends Fragment {
 
         boolean isAnyRecyclerViewChipSelected = adapter != null && adapter.isItemSelected();
 
-        if (!isAnyRecyclerViewChipSelected) {
+        if (isAnyRecyclerViewChipSelected) {
             progress += 25;
         }
-        if (chipGroup.getCheckedChipId() == View.NO_ID) {
+        if (!etDate.getText().toString().isEmpty()) {
             progress += 25;
         }
-        if (etDate.getText().toString().isEmpty()) {
+        if (!etTimeEntry.getText().toString().isEmpty()) {
             progress += 25;
         }
-        if (etTimeEntry.getText().toString().isEmpty()) {
-            progress += 25;
-        }
-        if (etTimeExit.getText().toString().isEmpty()) {
+        if (!etTimeExit.getText().toString().isEmpty()) {
             progress += 25;
         }
         System.out.println(progress);
-        reservationProgressBar.setProgress(progress);
+        ObjectAnimator animation = ObjectAnimator.ofInt(reservationProgressBar, "progress", reservationProgressBar.getProgress(), progress);
+        animation.setDuration(500); // Duration of animation in milliseconds
+        animation.start();
     }
 
 
@@ -257,6 +277,7 @@ public class RealizarReservaFragment extends Fragment {
         if (adapter != null) {
             adapter.setChipType(selectedChipType);
             adapter.notifyDataSetChanged();
+            setProgress(getView());
         }
     }
 
@@ -282,6 +303,7 @@ public class RealizarReservaFragment extends Fragment {
                             dataSet.add(numeroPlaza);
                             Collections.sort(dataSet);
                         }
+                        setProgress(getView());
                         adapter.notifyDataSetChanged();
                     } else {
                         Toast.makeText(getContext(), "Error obteniendo datos", Toast.LENGTH_SHORT).show();
@@ -335,8 +357,38 @@ public class RealizarReservaFragment extends Fragment {
         Reservation reservation = new Reservation(FirebaseAuth.getInstance().getCurrentUser().getUid(), selectedChip, etDate.getText().toString(), etTimeEntry.getText().toString(), etTimeExit.getText().toString(), selectedChipType);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("reservations")
-                .add(reservation);
+                .add(reservation)
+                .addOnSuccessListener(documentReference -> {
+                    scheduleNotification(etDate.getText().toString(), etTimeEntry.getText().toString(), "Reservation Reminder", "Tu reserva comenzará en breves momentos");
+                })
+                .addOnFailureListener(e -> Log.w("TAG", "Error adding document", e));
     }
+
+    private void scheduleNotification(String date, String time, String title, String message) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
+        try {
+            Date reservationDate = dateFormat.parse(date + " " + time);
+            if (reservationDate != null) {
+                long notificationTime = reservationDate.getTime() - (60 * 60 * 1000); // Una hora antes
+
+                Data data = new Data.Builder()
+                        .putString("title", title)
+                        .putString("message", message)
+                        .build();
+
+                OneTimeWorkRequest workRequest = new OneTimeWorkRequest.Builder(ReservationWorker.class)
+                        .setInitialDelay(notificationTime - System.currentTimeMillis(), TimeUnit.MILLISECONDS)
+                        .setInputData(data)
+                        .build();
+
+                WorkManager.getInstance(requireContext()).enqueue(Collections.singletonList(workRequest));
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     public String getCHipType(String chipText){
         if (Objects.equals(chipText, "Automovil")){
@@ -366,7 +418,6 @@ public class RealizarReservaFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         addReservation();
                         Bundle bundle = new Bundle();
-                        System.out.println(bundle);
                         bundle.putString("chipType", selectedChipType);
                         bundle.putString("chip", selectedChip);
                         bundle.putString("date", etDate.getText().toString());
