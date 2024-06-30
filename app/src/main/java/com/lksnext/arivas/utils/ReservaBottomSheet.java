@@ -1,6 +1,5 @@
 package com.lksnext.arivas.utils;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,19 +11,22 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.firebase.FirebaseApp;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.wallet.AutoResolvableVoidResult;
+import com.google.android.gms.wallet.CreateWalletObjectsRequest;
+import com.google.android.gms.wallet.LoyaltyWalletObject;
+import com.google.android.gms.wallet.Wallet;
+import com.google.android.gms.wallet.WalletConstants;
+import com.google.android.gms.wallet.WalletObjectsClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.lksnext.arivas.R;
-
-import java.util.Objects;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class ReservaBottomSheet extends BottomSheetDialogFragment {
 
@@ -77,37 +79,53 @@ public class ReservaBottomSheet extends BottomSheetDialogFragment {
         horaSalidaText.setText("Hora de salida:   " +horaSalida);
 
         rootView.findViewById(R.id.eliminar_reserva).setOnClickListener(v -> {
-            createDeleteDialog(FirebaseAuth.getInstance().getCurrentUser().getUid().toString());
+            createDeleteDialog(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        });
+
+        rootView.findViewById(R.id.addToGoogleWalletButton).setOnClickListener(v -> {
+            saveToGoogleWallet();
         });
 
         return rootView;
     }
 
     private void setIcon(ImageView tipiPLazaIcon, String tipoPlaza) {
-        if (tipoPlaza.equals("STD")) {
-            tipiPLazaIcon.setImageResource(R.drawable.auto);
-        } else if (tipoPlaza.equals("MOTO")) {
-            tipiPLazaIcon.setImageResource(R.drawable.motociclea);
-        } else if (tipoPlaza.equals("ELEC")) {
-            tipiPLazaIcon.setImageResource(R.drawable.electrico);
-        } else if (tipoPlaza.equals("DISC")) {
-            tipiPLazaIcon.setImageResource(R.drawable.discapacitado);
-        } else {
-            tipiPLazaIcon.setImageResource(R.drawable.auto);
+        switch (tipoPlaza) {
+            case "STD":
+                tipiPLazaIcon.setImageResource(R.drawable.auto);
+                break;
+            case "MOTO":
+                tipiPLazaIcon.setImageResource(R.drawable.motociclea);
+                break;
+            case "ELEC":
+                tipiPLazaIcon.setImageResource(R.drawable.electrico);
+                break;
+            case "DISC":
+                tipiPLazaIcon.setImageResource(R.drawable.discapacitado);
+                break;
+            default:
+                tipiPLazaIcon.setImageResource(R.drawable.auto);
+                break;
         }
     }
 
     private void setImage(ImageView tipoPlazaImage, String tipoPlaza) {
-        if (tipoPlaza.equals("STD")) {
-            tipoPlazaImage.setImageResource(R.drawable.coche_normal);
-        } else if (tipoPlaza.equals("MOTO")) {
-            tipoPlazaImage.setImageResource(R.drawable.moto);
-        } else if (tipoPlaza.equals("ELEC")) {
-            tipoPlazaImage.setImageResource(R.drawable.coche_electrico);
-        } else if (tipoPlaza.equals("DISC")) {
-            tipoPlazaImage.setImageResource(R.drawable.coche_minusvalido);
-        } else {
-            tipoPlazaImage.setImageResource(R.drawable.coche_normal);
+        switch (tipoPlaza) {
+            case "STD":
+                tipoPlazaImage.setImageResource(R.drawable.coche_normal);
+                break;
+            case "MOTO":
+                tipoPlazaImage.setImageResource(R.drawable.moto);
+                break;
+            case "ELEC":
+                tipoPlazaImage.setImageResource(R.drawable.coche_electrico);
+                break;
+            case "DISC":
+                tipoPlazaImage.setImageResource(R.drawable.coche_minusvalido);
+                break;
+            default:
+                tipoPlazaImage.setImageResource(R.drawable.coche_normal);
+                break;
         }
     }
 
@@ -115,17 +133,19 @@ public class ReservaBottomSheet extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
+
     public String getTipoPlaza(String tipoPlaza){
-        if (tipoPlaza.equals("STD")) {
-            return "Plaza estándar";
-        } else if (tipoPlaza.equals("MOTO")) {
-            return "Plaza de moto";
-        } else if (tipoPlaza.equals("ELEC")) {
-            return "Plaza con estación de carga";
-        } else if (tipoPlaza.equals("DISC")) {
-            return "Plaza para minusválidos";
-        } else {
-            return "Plaza estándar";
+        switch (tipoPlaza) {
+            case "STD":
+                return "Plaza estándar";
+            case "MOTO":
+                return "Plaza de moto";
+            case "ELEC":
+                return "Plaza con estación de carga";
+            case "DISC":
+                return "Plaza para minusválidos";
+            default:
+                return "Plaza estándar";
         }
     }
 
@@ -156,7 +176,7 @@ public class ReservaBottomSheet extends BottomSheetDialogFragment {
                                 .document(document.getId())
                                 .delete()
                                 .addOnSuccessListener(aVoid -> {
-                                    this.dismiss();
+                                    dismiss();
                                 })
                                 .addOnFailureListener(e -> {
                                     Toast.makeText(requireContext(), "Error al eliminar la reserva: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -166,5 +186,38 @@ public class ReservaBottomSheet extends BottomSheetDialogFragment {
                 .addOnFailureListener(e -> {
                     Toast.makeText(requireContext(), "Error al buscar la reserva: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
+    }
+
+    private void saveToGoogleWallet() {
+        LoyaltyWalletObject loyaltyObject = buildLoyaltyObject();
+
+        WalletObjectsClient walletObjectsClient = Wallet.getWalletObjectsClient(requireActivity(), new Wallet.WalletOptions.Builder()
+                .setEnvironment(WalletConstants.ENVIRONMENT_TEST)
+                .build());
+
+        CreateWalletObjectsRequest.Builder requestBuilder = CreateWalletObjectsRequest.newBuilder();
+        requestBuilder.setLoyaltyWalletObject(loyaltyObject);
+        CreateWalletObjectsRequest request = requestBuilder.build();
+
+        Task<AutoResolvableVoidResult> task = walletObjectsClient.createWalletObjects(request);
+
+        task.addOnSuccessListener(autoResolvableVoidResult -> {
+            Toast.makeText(requireContext(), "Pase añadido a Google Wallet", Toast.LENGTH_SHORT).show();
+            dismiss();
+        });
+
+        task.addOnFailureListener(e -> {
+            Toast.makeText(requireContext(), "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        });
+    }
+
+    private LoyaltyWalletObject buildLoyaltyObject() {
+        LoyaltyWalletObject.Builder loyaltyObject = LoyaltyWalletObject.newBuilder();
+
+        loyaltyObject.setProgramName("Parking Reserva");
+        loyaltyObject.setAccountId(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        loyaltyObject.setIssuerName("Parking Company");
+
+        return loyaltyObject.build();
     }
 }

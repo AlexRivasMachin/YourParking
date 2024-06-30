@@ -163,6 +163,44 @@
             />
     </LinearLayout>
 
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/addToGoogleWalletButton"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="#CD062E59"
+        android:layout_marginBottom="15dp"
+        android:contentDescription="add_to_google_wallet_button_content_description">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Añadir a Google Wallet"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:gravity="center_vertical"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/wallet_icon"
+                android:layout_marginStart="8dp"/>
+        </LinearLayout>
+
+    </FrameLayout>
+
     <Button
         android:id="@+id/eliminar_reserva"
         style="@style/Widget.Material3.Button.OutlinedButton.Icon"
@@ -175,6 +213,7 @@
         app:iconTint="#D70202"
         app:strokeColor="#D70202"
         card_view:iconTint="#D70202" />
-    />
+
+
 
 </LinearLayout>

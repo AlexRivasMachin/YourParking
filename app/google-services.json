@@ -12,7 +12,12 @@
           "package_name": "com.lksnext.arivas"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "615798939997-qiv5p67rh4mehptmt2d5oep3er7onjle.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBa7_RFcYPJntneuxHPSe4RRfQexHigdB0"
@@ -20,7 +25,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "615798939997-qiv5p67rh4mehptmt2d5oep3er7onjle.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
