@@ -148,12 +148,30 @@ public class RealizarReservaFragment extends Fragment {
             }
         });
 
+        Button infoButton = rootView.findViewById(R.id.info_button);
+        infoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showInfoDialog();
+            }
+        });
+
         return rootView;
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
+    }
+
+    private void showInfoDialog() {
+        new MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Información de Reservas")
+                .setIcon(R.drawable.info)
+                .setMessage("Las reservas solo se pueden realizar de 6:00 a 23:00 siendo la duración máxima de una reserva de 9 horas. \n\n" +
+                        "Recuerda que solo se pueden realizar reservas con una antelación máxima de 7 días. \n\n")
+                .setPositiveButton("Entendido", null)
+                .show();
     }
 
     public void setProgress(View rootView) {
@@ -222,7 +240,7 @@ public class RealizarReservaFragment extends Fragment {
 
 
     public void createTimePicker(EditText etTime, @Nullable EditText etTimeEntry) {
-        int hour = 8;
+        int hour = 6;
         int minute = 0;
 
         MaterialTimePicker.Builder timePickerBuilder = new MaterialTimePicker.Builder()
@@ -238,9 +256,22 @@ public class RealizarReservaFragment extends Fragment {
             public void onClick(View v) {
                 int hourOfDay = timePicker.getHour();
                 int minute = timePicker.getMinute();
+
+                if (minute >= 30) {
+                    minute = 30;
+                } else {
+                    minute = 0;
+                }
+
+                if (hourOfDay < 6) {
+                    hourOfDay = 6;
+                } else if (hourOfDay > 23) {
+                    hourOfDay = 23;
+                }
+
                 String selectedTime = String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute);
 
-                if (etTimeEntry != null) { // Estamos seleccionando la hora de salida
+                if (etTimeEntry != null) {
                     String entryTime = etTimeEntry.getText().toString();
                     if (!entryTime.isEmpty()) {
                         String[] parts = entryTime.split(":");
@@ -256,8 +287,12 @@ public class RealizarReservaFragment extends Fragment {
                         calendarExit.set(Calendar.MINUTE, minute);
 
                         long difference = calendarExit.getTimeInMillis() - calendarEntry.getTimeInMillis();
-                        if (difference > 8 * 60 * 60 * 1000) { // Más de 8 horas
-                            calendarExit.setTimeInMillis(calendarEntry.getTimeInMillis() + 8 * 60 * 60 * 1000);
+                        if (difference < 0) {
+                            Toast.makeText(RealizarReservaFragment.this.getContext(), "La hora de salida no puede ser anterior a la de entrada", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        if (difference > 8 * 60 * 60 * 1000) {
+                            calendarExit.setTimeInMillis(calendarEntry.getTimeInMillis() + 9 * 60 * 60 * 1000);
                             hourOfDay = calendarExit.get(Calendar.HOUR_OF_DAY);
                             minute = calendarExit.get(Calendar.MINUTE);
                             selectedTime = String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute);

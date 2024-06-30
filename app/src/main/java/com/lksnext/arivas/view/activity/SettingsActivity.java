@@ -16,16 +16,11 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        // Obtén el NavHostFragment
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
 
-        // Asegúrate de que el NavHostFragment no sea null
         if (navHostFragment != null) {
-            // Obtén el NavController
             NavController navController = navHostFragment.getNavController();
 
-            // Configura la navegación
-            // NavigationUI.setupActionBarWithNavController(this, navController);
         }
     }
 

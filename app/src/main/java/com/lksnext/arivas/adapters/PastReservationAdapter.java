@@ -53,9 +53,6 @@ public class PastReservationAdapter extends RecyclerView.Adapter<PastReservation
     }
 
     public static class ReservationViewHolder extends RecyclerView.ViewHolder {
-
-        private MaterialCardView reservationCard;
-        private Chip pastReservationReservation;
         private Chip pastReservationDate;
         private Chip pastReservationIn;
         private Button eliminarButton;

@@ -50,55 +50,73 @@
       app:layout_constraintTop_toTopOf="parent"
       app:srcCompat="@drawable/yourparking_blue" />
 
-  <com.google.android.material.textfield.TextInputLayout
-      android:id="@+id/NombreUsuariolayout"
-      android:layout_width="300dp"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="8dp"
-      android:layout_marginBottom="32dp"
-      android:hint="Correo electrónico"
-      app:layout_constraintBottom_toTopOf="@+id/iniciarSesion"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/Titulo"
-      tools:ignore="MissingConstraints">
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/NombreUsuariolayout"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="32dp"
+        android:hint="Correo electrónico"
+        app:layout_constraintBottom_toTopOf="@+id/iniciarSesion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Titulo"
+        app:layout_constraintVertical_bias="0.04000002"
+        tools:ignore="MissingConstraints">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:layout_width="match_parent"
-        android:layout_height="53dp" />
-  </com.google.android.material.textfield.TextInputLayout>
+      <com.google.android.material.textfield.TextInputEditText
+          android:layout_width="match_parent"
+          android:layout_height="53dp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-  <com.google.android.material.textfield.TextInputLayout
-      android:id="@+id/ContraseñaInputLayout"
-      android:layout_width="300dp"
-      android:layout_height="wrap_content"
-      android:hint="Contraseña"
-      android:orientation="horizontal"
-      app:endIconMode="password_toggle"
-      app:layout_constraintBottom_toTopOf="@+id/iniciarSesion"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/NombreUsuariolayout"
-      tools:ignore="MissingConstraints">
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ContraseñaInputLayout"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Contraseña"
+        android:orientation="horizontal"
+        app:endIconMode="password_toggle"
+        app:layout_constraintBottom_toTopOf="@+id/iniciarSesion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NombreUsuariolayout"
+        app:layout_constraintVertical_bias="0.050000012"
+        tools:ignore="MissingConstraints">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:layout_width="match_parent"
-        android:layout_height="53dp"
-        android:inputType="textPassword" />
-  </com.google.android.material.textfield.TextInputLayout>
+      <com.google.android.material.textfield.TextInputEditText
+          android:layout_width="match_parent"
+          android:layout_height="53dp"
+          android:inputType="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-  <Button
-      android:id="@+id/iniciarSesion"
-      android:layout_width="320dp"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="200dp"
-      android:text="@string/title_login"
-      android:textColor="@color/white"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.505"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/Titulo"
-      tools:ignore="MissingConstraints" />
+    <TextView
+        android:id="@+id/forgot_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="¿Has olvidado tu contraseña?"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ContraseñaInputLayout" />
+
+
+    <Button
+        android:id="@+id/iniciarSesion"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="180dp"
+        android:text="@string/title_login"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Titulo"
+        tools:ignore="MissingConstraints" />
 
   <Button
       android:id="@+id/registrarse"
@@ -118,7 +136,7 @@
       android:id="@+id/textView"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="or sign in with"
+      android:text="o accede con"
       android:textAlignment="center"
       app:layout_constraintEnd_toEndOf="parent"
       android:layout_marginVertical="10dp"
@@ -131,7 +149,7 @@
       style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="  Sign in with google"
+      android:text=" Acceder con google"
       android:textSize="16sp"
       android:layout_marginTop="8dp"
       app:layout_constraintEnd_toEndOf="parent"

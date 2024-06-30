@@ -67,29 +67,3 @@ public class Reservation {
         this.type = type;
     }
 }
-/*
-* // Obtén una referencia a tu colección en Firestore
-FirebaseFirestore db = FirebaseFirestore.getInstance();
-CollectionReference reservationsRef = db.collection("reservations");
-
-// Crea un objeto de reserva
-String uid = FirebaseAuth.getInstance().getCurrentUser().getUid(); // UID del usuario actualmente autenticado
-String slotId = "slot123"; // Ejemplo de ID de slot (puedes cambiar esto según tu lógica)
-String date = "2024-06-21"; // Fecha de la reserva (ejemplo, asegúrate de usar un formato apropiado)
-String inTime = "10:00"; // Hora de entrada
-String outTime = "12:00"; // Hora de salida
-
-Reservation reservation = new Reservation(uid, slotId, date, inTime, outTime);
-
-// Agrega la reserva a Firestore
-reservationsRef.add(reservation)
-        .addOnSuccessListener(documentReference -> {
-            Log.d(TAG, "Reserva agregada con ID: " + documentReference.getId());
-            // Aquí puedes realizar cualquier acción adicional después de agregar la reserva
-        })
-        .addOnFailureListener(e -> {
-            Log.w(TAG, "Error al agregar la reserva", e);
-            // Maneja errores si es necesario
-        });
-
-* */

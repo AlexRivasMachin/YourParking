@@ -1,10 +1,16 @@
 package com.lksnext.arivas.view.activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -14,7 +20,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,6 +31,8 @@ import com.lksnext.arivas.R;
 import com.lksnext.arivas.databinding.ActivityLoginBinding;
 import com.lksnext.arivas.utils.ProviderType;
 import com.lksnext.arivas.viewmodel.login.LoginViewModel;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -80,7 +90,68 @@ public class LoginActivity extends AppCompatActivity {
                 goToMainActivity();
             }
         });
+
+        TextView forgotPassword = findViewById(R.id.forgot_password);
+
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPasswordResetDialog();
+            }
+        });
+
     }
+
+    private void showPasswordResetDialog() {
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this)
+                .setIcon(R.drawable.mail)
+                .setTitle("Recuperar contraseña")
+                .setMessage("Introduce tu correo electrónico para recuperar tu contraseña.");
+
+        final EditText input = new EditText(this);
+        input.setHint("Correo electrónico");
+        input.setPadding(60, 40, 60, 40);
+        input.setSingleLine();
+        input.setHintTextColor(getResources().getColor(R.color.blue_main));
+        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+        builder.setView(input);
+
+        builder.setPositiveButton("Enviar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String email = input.getText().toString().trim();
+                sendPasswordResetEmail(email);
+            }
+        });
+
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
+    }
+
+
+    private void sendPasswordResetEmail(String email) {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+
+        auth.sendPasswordResetEmail(email)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(LoginActivity.this, "Correo de recuperación enviado.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Error al enviar el correo de recuperación.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+
 
     private void signInWithEmailAndPassword(String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)

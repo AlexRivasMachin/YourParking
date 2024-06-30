@@ -61,10 +61,8 @@ public class AjustesElminarCuentaFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Obtener el NavController
         navController = Navigation.findNavController(view);
 
-        // Configurar OnClickListener para la imagen de volver
         view.findViewById(R.id.volverAjustesEliminarCuentaImage).setOnClickListener(v -> navController.popBackStack(R.id.ajustesFragment, false));
     }
 }

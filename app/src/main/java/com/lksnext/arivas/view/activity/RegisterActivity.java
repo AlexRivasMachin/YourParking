@@ -23,11 +23,9 @@ public class    RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Asignamos la vista/interfaz de registro
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        //Asignamos el viewModel de register
         registerViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
 
         binding.btnRegister.setOnClickListener(v -> {
@@ -49,7 +47,6 @@ public class    RegisterActivity extends AppCompatActivity {
                                editor.putString("provider", ProviderType.BASIC.name());
                                editor.apply();
 
-                               // Ir a la actividad principal
                                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                startActivity(intent);

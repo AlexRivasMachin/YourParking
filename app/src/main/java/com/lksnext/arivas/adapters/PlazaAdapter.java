@@ -92,7 +92,6 @@ public class PlazaAdapter extends RecyclerView.Adapter<PlazaAdapter.PlazaViewHol
             super(itemView);
             reservationChip = itemView.findViewById(R.id.reservation_chip);
 
-            // Manejar el clic en el chip
             reservationChip.setOnClickListener(v -> {
                 int position = getAdapterPosition();
                 if (position != RecyclerView.NO_POSITION) {

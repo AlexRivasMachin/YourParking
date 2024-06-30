@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.lksnext.arivas.R;
@@ -34,6 +35,7 @@ import com.lksnext.arivas.viewmodel.ajustes.AjustesBaseViewModel;
 public class AjustesBaseFragment extends Fragment {
 
     private AjustesBaseViewModel mViewModel;
+    private MaterialSwitch notificacionesSwitch;
 
     public static AjustesBaseFragment newInstance() {
         return new AjustesBaseFragment();
@@ -64,6 +66,16 @@ public class AjustesBaseFragment extends Fragment {
         MaterialButton cerrarSesion = view.findViewById(R.id.cerrarSesion);
         cerrarSesion.setOnClickListener(v -> {
             logout(view);
+        });
+
+        notificacionesSwitch = view.findViewById(R.id.notificacionesSwitch);
+
+        notificacionesSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                activarNotificaciones();
+            } else {
+                desactivarNotificaciones();
+            }
         });
 
         return view;
@@ -113,5 +125,12 @@ public class AjustesBaseFragment extends Fragment {
                     deleteAccount();
                 })
                 .show();
+    }
+    private void activarNotificaciones() {
+        Toast.makeText(requireContext(), "Notificaciones Activadas", Toast.LENGTH_SHORT).show();
+    }
+
+    private void desactivarNotificaciones() {
+        Toast.makeText(requireContext(), "Notificaciones Desactivadas", Toast.LENGTH_SHORT).show();
     }
 }

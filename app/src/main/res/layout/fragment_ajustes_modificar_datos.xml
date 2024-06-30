@@ -1,139 +1,182 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragment.ajustes.AjustesModificarDatosFragment">
+    android:padding="16dp">
 
-    <ImageView
-        android:id="@+id/volverModificarDatosCuentaImage"
-        android:layout_width="76dp"
-        android:layout_height="25dp"
-        android:src="@drawable/atras"
-        android:textAlignment="textStart"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="10dp"
-        tools:layout_editor_absoluteY="39dp"
-        tools:textAlignment="viewStart" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/Nombre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Nombre:"
-        android:textColor="@color/black"
-        android:textColorLink="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.071"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Ajustes"
-        tools:ignore="MissingConstraints" />
+        <ImageView
+            android:id="@+id/photoImageView"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_profile"
+            android:contentDescription="Profile photo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/NumTlfn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Número de tlfn.:"
-        android:textColor="@color/black"
-        android:textColorLink="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.087"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/FechaNcto."
-        tools:ignore="MissingConstraints" />
+        <TextView
+            android:id="@+id/btnCambiarFoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Cambiar foto de perfil"
+            android:textColor="@color/blue_main"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/photoImageView" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Correo electrónico:"
-        android:textColor="@color/black"
-        android:textColorLink="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.093"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NumTlfn"
-        tools:ignore="MissingConstraints" />
+        <TextView
+            android:id="@+id/Ajustes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/title_ajustes_perfil"
+            android:textAlignment="textStart"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnCambiarFoto" />
 
-    <TextView
-        android:id="@+id/Apellidos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
-        android:text="Apellidos:"
-        android:textColor="@color/black"
-        android:textColorLink="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.073"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Nombre"
-        tools:ignore="MissingConstraints" />
+        <TextView
+            android:id="@+id/tvNombreLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre:"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Ajustes"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"/>
 
-    <TextView
-        android:id="@+id/FechaNcto."
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Fecha de ncto.:"
-        android:textColor="@color/black"
-        android:textColorLink="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.085"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Apellidos"
-        tools:ignore="MissingConstraints" />
+        <TextView
+            android:id="@+id/tvNombreValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="John"
+            android:textSize="16sp"
+            android:paddingStart="14dp"
+            app:layout_constraintStart_toEndOf="@+id/tvNombreLabel"
+            app:layout_constraintEnd_toStartOf="@+id/ivEditNombre"
+            app:layout_constraintTop_toTopOf="@+id/tvNombreLabel"/>
 
-    <TextView
-        android:id="@+id/modificarDatos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Modificar datos personales"
-        android:textColor="@color/blue_main"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.921"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        tools:ignore="MissingConstraints" />
+        <ImageView
+            android:id="@+id/ivEditNombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_edit"
+            android:contentDescription="Editar Nombre"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvNombreLabel"
+            android:layout_marginEnd="16dp"/>
 
-    <TextView
-        android:id="@+id/Ajustes"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="45dp"
-        android:text="@string/title_ajustes_perfil"
-        android:textAlignment="textStart"
-        android:textColor="?attr/colorOnSecondary"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/volverModificarDatosCuentaImage" />
+        <TextView
+            android:id="@+id/tvApellidosLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Apellidos:"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvNombreLabel"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"/>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnConfirmarCambios"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="424dp"
-        android:text="Confirmar cambios"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        <TextView
+            android:id="@+id/tvApellidosValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Doe"
+            android:textSize="16sp"
+            android:paddingStart="14dp"
+            app:layout_constraintStart_toEndOf="@+id/tvApellidosLabel"
+            app:layout_constraintEnd_toStartOf="@+id/ivEditApellidos"
+            app:layout_constraintTop_toTopOf="@+id/tvApellidosLabel"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/ivEditApellidos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_edit"
+            android:contentDescription="Editar Apellidos"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvApellidosLabel"
+            android:layout_marginEnd="16dp"/>
+
+        <TextView
+            android:id="@+id/tvCorreoLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email:"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvApellidosLabel"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"/>
+
+        <TextView
+            android:id="@+id/tvCorreoValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="14dp"
+            android:text="john.doe@example.com"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/tvCorreoLabel"
+            app:layout_constraintTop_toTopOf="@+id/tvCorreoLabel" />
+
+        <TextView
+            android:id="@+id/tvNumTlfnLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Número de teléfono:"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvCorreoLabel"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"/>
+
+        <TextView
+            android:id="@+id/tvNumTlfnValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="+123456789"
+            android:paddingStart="14dp"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/tvNumTlfnLabel"
+            app:layout_constraintEnd_toStartOf="@+id/ivEditNumTlfn"
+            app:layout_constraintTop_toTopOf="@+id/tvNumTlfnLabel"/>
+
+        <ImageView
+            android:id="@+id/ivEditNumTlfn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_edit"
+            android:contentDescription="Editar Número de teléfono"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvNumTlfnLabel"
+            android:layout_marginEnd="16dp"/>
+
+
+        <Button
+            android:id="@+id/btnConfirmarCambios"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Confirmar cambios"
+            android:textColor="@android:color/white"
+            android:background="@color/blue_main"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvNumTlfnLabel"
+            android:layout_marginBottom="16dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
