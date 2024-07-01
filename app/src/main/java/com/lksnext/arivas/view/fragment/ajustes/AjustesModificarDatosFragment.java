@@ -78,6 +78,11 @@ public class AjustesModificarDatosFragment extends Fragment {
         tvCorreo = view.findViewById(R.id.tvCorreoValue);
         tvNumTlfn = view.findViewById(R.id.tvNumTlfnValue);
 
+        tvCorreo = view.findViewById(R.id.tvCorreoValue);
+        if (currentUser != null) {
+            tvCorreo.setText(currentUser.getEmail());
+        }
+
         loadUserData();
 
         navController = Navigation.findNavController(view);
@@ -85,6 +90,8 @@ public class AjustesModificarDatosFragment extends Fragment {
         setupEditClickListener(view.findViewById(R.id.ivEditNombre), tvNombre);
         setupEditClickListener(view.findViewById(R.id.ivEditApellidos), tvApellidos);
         setupEditClickListener(view.findViewById(R.id.ivEditNumTlfn), tvNumTlfn);
+
+        botonCambiarFoto.setVisibility(View.GONE);
 
         botonCambiarFoto.setOnClickListener(v -> {
             openFileChooser();
