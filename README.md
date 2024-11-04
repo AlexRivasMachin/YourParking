@@ -1,4 +1,4 @@
-# 🚗 Parking App
+# 🚗 YourParking App
 
 [![Platform](https://img.shields.io/badge/platform-Android-green.svg)](https://developer.android.com)
 [![Language](https://img.shields.io/badge/language-Java-yellow.svg)](https://www.java.com)
@@ -6,7 +6,7 @@
 
 ## 📱 Descripción
 
-**Parking App** es una aplicación móvil para Android diseñada para facilitar la gestión de parkings. Con una interfaz de usuario intuitiva y moderna, permite a los usuarios encontrar y gestionar sus espacios de aparcamiento con facilidad. La aplicación utiliza Firebase para la autenticación, almacenamiento de datos y análisis en tiempo real.
+**YourParking** es una aplicación móvil para Android diseñada para facilitar la gestión de parkings. Con una interfaz de usuario intuitiva y moderna, permite a los usuarios encontrar y gestionar sus espacios de aparcamiento con facilidad. La aplicación utiliza Firebase para la autenticación, almacenamiento de datos y análisis en tiempo real.
 
 ## 🌟 Características
 
